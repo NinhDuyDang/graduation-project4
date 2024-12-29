@@ -1,0 +1,304 @@
+<!doctype html>
+<html class="no-js" lang=""
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Book Library</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <th:block th:replace="layout_customer/head :: head"></th:block>
+    <style>
+        /* Đưa form vào giữa màn hình */
+        #form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f2f2f2; /* Màu nền nhẹ nhàng */
+        }
+
+        .login-form {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            /*text-align: center;*/
+        }
+
+        .login-form h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .login-form label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .login-form input[type="email"],
+        .login-form input[type="date"],
+        .login-form input[type="text"],
+        .login-form input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 0px 0 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .login-form h2{
+            text-align: center;
+        }
+
+        .login-form .thm_btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #5cb85c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-form .thm_btn:hover {
+            background-color: #4cae4c;
+        }
+
+        .login-form .action ul_li {
+            margin-top: 20px;
+        }
+
+        .login-form a {
+            color: #5cb85c;
+            text-decoration: none;
+        }
+
+        .login-form a:hover {
+            text-decoration: underline;
+        }
+
+        /* Style liên kết "Forgot password" và phần cảnh báo */
+        .login-form .left,
+        .login-form .right {
+            display: block;
+            margin-top: 10px;
+        }
+
+        .login-form .right p {
+            font-size: 14px;
+            color: red;
+        }
+
+        input {
+            text-transform: none;
+            autocapitalize: none;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+    <!--************************************
+            Header Start
+    *************************************-->
+    <div th:include="layout_customer/navbar:: navbar"></div>
+    <!--************************************
+            Header End
+    *************************************-->
+
+    <main id="tg-main" class="tg-main tg-haslayout">
+        <!--************************************
+                News Grid Start
+        *************************************-->
+        <div class="tg-sectionspace tg-haslayout">
+            <div class="container">
+                <div class="row">
+                    <section id="form" style="margin-top: 50px;"><!--form-->
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-1 col-sm-offset-1"></div>
+                                <div class="col-sm-6 col-sm-offset-1">
+                                    <div class="login-form"><!--login form-->
+                                        <h2>Đăng ký tài khoản mới</h2>
+                                        <form action="#" th:action="@{/saveUser}" th:object="${user}" method="post" name="login" enctype="multipart/form-data">
+                                            <label>Tên đăng nhập(*) (Không được chứa ký tự đặc biệt) </label>
+                                            <input type="text" id="username" name="username"
+                                                   pattern="^[A-Za-z0-9_]{6,16}$"
+                                                   th:field="*{username}" placeholder="Tên đăng nhập" required>
+                                            <span id="msg_username"></span>
+                                            <label>Họ và tên(*) </label>
+                                            <input type="text" placeholder="Họ và tên" th:field="*{customer.name}" required>
+                                            <label>Email(*) </label>
+                                            <input type="email" id="email" name="email" pattern="[A-Za-z0-9.]+@[A-Za-z0-9]+\.[A-Za-z]{1,63}$"
+                                                   placeholder="Your Email" th:field="*{customer.email}" required>
+                                            <span id="msg_email"></span>
+                                            <br>
+                                            <label>Mật khẩu(*)</label>
+                                            <div style="position: relative;">
+                                                <input type="password" id="password"
+                                                       placeholder="Tối thiểu tám ký tự, ít nhất một chữ cái, một số và một ký tự đặc biệt (@$!%*#?&)"
+                                                       pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+                                                       title="Minimum eight characters, at least one letter, one number and one special character"
+                                                       th:field="*{password}"
+                                                       required>
+                                                <input type="checkbox" id="togglePassword" style="position: absolute; right: 10px; top: 10px;">
+                                                <label for="togglePassword" style="cursor: pointer;">Hiển thị mật khẩu</label>
+                                            </div>
+                                            <label>Số điện thoại </label>
+                                            <input type="text" placeholder="Số điện thoại" pattern="^[0-9]{10,11}$"th:field="*{customer.phone}" >
+                                            <label>Địa chỉ </label>
+                                            <input type="text" placeholder="Địa chỉ" th:field="*{customer.address}" >
+                                            <label>Ngày sinh </label>
+                                            <input type="date" placeholder="Ngày sinh" th:field="*{customer.birthday}" >
+                                            <label>Ảnh đại diện </label>
+                                            <input type="file" name="image" id="image" max-file-size="5.120"
+                                                   accept="image/png, image/jpeg" class="file-input">
+                                            <span th:text="${alert}" style="color:red"></span>
+                                            <button class="thm_btn" type="submit">Đăng ký ngay</button>
+                                            <div class="action ul_li">
+                                <span class="right">
+                                    <span>Đã có tài khoản ? <a th:href="@{/login}">Đăng nhập</a></span>
+                                </span>
+                                            </div>
+                                        </form>
+                                    </div><!--/login form-->
+
+                                </div>
+                            </div>
+                        </div>
+                    </section><!--/form-->
+                </div>
+            </div>
+        </div>
+        <!--************************************
+                News Grid End
+        *************************************-->
+    </main>
+
+    <th:block th:replace="layout_customer/footer :: footer_customer"></th:block>
+    <!--************************************
+            Footer End
+    *************************************-->
+</div>
+<!--************************************
+        Wrapper End
+*************************************-->
+<!--<th:block th:replace="layout_customer/js :: js"></th:block>-->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#username").on("input", function(e) {
+            $('#msg_username').hide();
+            if ($('#username').val() == null || $('#username').val() == "") {
+                $('#msg_username').show();
+                $("#msg_username").html("Username is a required field.").css("color", "red");
+            } else {
+                $.ajax({
+                    type: 'post',
+                    url: "/check_username",
+                    data: JSON.stringify({userName: $('#username').val()}),
+                    contentType: 'application/json; charset=utf-8',
+                    cache: false,
+                    beforeSend: function (f) {
+                        $('#msg_username').show();
+                        $('#msg_username').html('Checking...');
+                    },
+                    statusCode: {
+                        400: function(xhr) {
+                            $('#msg_username').show();
+                            $("#msg_username").html("Username available").css("color", "green");
+                        }
+                    },
+                    success: function(msg_username) {
+                        $('#msg_username').show();
+                        if(msg_username !== null || msg_username !== "") {
+                            $("#msg_username").html("Username already taken").css("color", "red");
+                        } else {
+                            $("#msg_username").html("Username available").css("color", "green");
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        $('#msg_username').show();
+                        $("#msg_username").html(textStatus + " " + errorThrown).css("color", "red");
+                    }
+                });
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#email").on("input", function(g) {
+            $('#msg_email').hide();
+            if ($('#email').val() == null || $('#email').val() == "") {
+                $('#msg_email').show();
+                $("#msg_email").html("Email is a required field.").css("color", "red");
+            } else {
+                $.ajax({
+                    type: 'post',
+                    url: "/check_email",
+                    data: JSON.stringify({email: $('#email').val()}),
+                    contentType: 'application/json; charset=utf-8',
+                    // dataType: 'json',
+                    cache: false,
+                    beforeSend: function (h) {
+                        $('#msg_email').show();
+                        $('#msg_email').html('Checking...');
+                    },
+                    statusCode: {
+                        400: function(xhr) {
+                            $('#msg_email').show();
+                            $("#msg_email").html("Email available").css("color", "green");
+                        }
+                    },
+                    success: function(msg_email) {
+                        $('#msg_email').show();
+                        if(msg_email !== null || msg_email !== "") {
+                            $("#msg_email").html("Email already taken").css("color", "red");
+                        } else {
+                            $("#msg_email").html("Email available").css("color", "green");
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        $('#msg_email').show();
+                        $("#msg_email").html(textStatus + " " + errorThrown).css("color", "red");
+                    }
+                });
+            }
+        });
+    });
+</script>
+<script>
+    document.getElementById('togglePassword').addEventListener('change', function (e) {
+        const passwordInput = document.getElementById('password');
+        if (e.target.checked) {
+            passwordInput.type = 'text';
+        } else {
+            passwordInput.type = 'password';
+        }
+    });
+</script>
+<script th:inline="javascript">
+    window.onload = function() {
+        /* Kiểm tra nếu alert tồn tại */
+        /* Thymeleaf sẽ render giá trị alert */
+        var alertMessage = /*[[${alert}]]*/ null;
+        if (alertMessage !== null) {
+            alert(alertMessage);
+        }
+    };
+</script>
+
+</body>
+
+</html>

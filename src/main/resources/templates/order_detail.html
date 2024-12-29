@@ -1,0 +1,187 @@
+<!doctype html>
+<html class="no-js" lang=""
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Book Library</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <th:block th:replace="layout_customer/head :: head"></th:block>
+</head>
+<body>
+
+<div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+  <!--************************************
+          Header Start
+  *************************************-->
+  <div th:include="layout_customer/navbar:: navbar"></div>
+  <!--************************************
+          Header End
+  *************************************-->
+  <!--************************************
+          Inner Banner Start
+  *************************************-->
+  <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" th:attr="data-image-src=@{/images/parallax/bgparallax-07.jpg}">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="tg-innerbannercontent">
+            <h1>Đơn hàng của tôi</h1>
+            <ol class="tg-breadcrumb">
+              <li><a href="javascript:void(0);">Trang chủ</a></li>
+              <li class="tg-active">Đơn hàng</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--************************************
+          Inner Banner End
+  *************************************-->
+  <!--************************************
+          Main Start
+  *************************************-->
+  <main id="tg-main" class="tg-main tg-haslayout">
+    <!--************************************
+            News Grid Start
+    *************************************-->
+    <div class="tg-sectionspace tg-haslayout">
+      <div class="container">
+        <div class="row">
+          <section id="cart_items">
+            <div class="container">
+              <div class="table-responsive cart_info">
+                <table class="table table-condensed">
+                  <thead>
+                  <tr class="cart_menu">
+                    <td class="Receiver Name" style="text-align: center">Tên người nhận</td>
+                    <td class=" Phone" style="text-align: center">Số điện thoại</td>
+                    <td class="Address" style="text-align: center">Địa chỉ</td>
+                    <td class="quantity" style="text-align: center">Ngày</td>
+                    <td class="quantity" style="text-align: center">Trạng thái</td>
+                    <td class="total" style="text-align: center">Tổng</td>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td class="" style="text-align: center">
+                      <p th:text="${order.receiverName}"></p>
+                    </td>
+                    <td class="" style="text-align: center">
+                      <p th:text="${order.receiverPhone}"></p>
+                    </td>
+                    <td class="" style="text-align: center">
+                      <p th:text="${order.receiverAddress}"></p>
+                    </td>
+                    <td class="" style="text-align: center">
+                      <p th:text="${#calendars.format(order.createdAt, 'dd/MM/yyyy')}"></p>
+                    </td>
+                    <td class="" style="text-align: center">
+                      <div th:switch="${order.status}">
+                        <p th:case="'0'">Đang xử lý</p>
+                        <p th:case="'1'">Đang vận chuyển</p>
+                        <p th:case="'2'">Đã hoàn thành</p>
+                        <p th:case="'3'">Đã bị hủy</p>
+                      </div>
+                    </td>
+                    <td style="text-align: center">
+                      <p class="price" th:text="${order.getPrice()} + ' VND'"
+                         th:attr="data-price=${order.getPrice()}"></p>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <hr>
+              <h3 style="text-align: center">Sản phẩm theo đơn đặt hàng của bạn</h3>
+              <div class="table-responsive cart_info">
+                <table class="table table-condensed">
+                  <thead>
+                  <tr class="cart_menu">
+                    <td style="text-align: center" class="Receiver Name">Ảnh</td>
+                    <td style="text-align: center" class=" Phone">Tên sản phẩm</td>
+                    <td style="text-align: center" class="Address">Số lượng</td>
+                    <td style="text-align: center" class="quantity">Giá</td>
+                    <td style="text-align: center" class="total">Đơn vị vận chuyển</td>
+                    <td style="text-align: center" class="total">Mã giảm giá</td>
+                    <td style="text-align: center" class="total">Phương thức thanh toán</td>
+                    <td style="text-align: center" class="total">Tổng</td>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="orderdetails : ${orderdetail}">
+                    <td style="text-align: center" class="">
+                      <a th:href="@{'/product/productdetail/' + ${orderdetails.product.id}}">
+                        <img style="width: 50px;" th:src="${orderdetails.product.image}">
+                      </a>
+                    </td>
+                    <td style="text-align: center" class="">
+                      <a th:href="@{'/product/productdetail/'+${orderdetails.product.id}}">
+                        <p th:text="${orderdetails.product.name}"></p>
+                      </a>
+                    </td>
+                    <td style="text-align: center" class="">
+                      <p th:text="${orderdetails.quantity}"></p>
+                    </td>
+                    </td>
+                    <td style="text-align: center" class="">
+                      <p th:text="${orderdetails.price.longValue()+' VND'}"></p>
+                    </td>
+                    <td style="text-align: center" class="">
+                      <p th:text="${orderdetails.order.shippingUnit.name}"></p>
+                    </td>
+                    <td style="text-align: center" class="">
+                      <p th:if="${orderdetails.order.promotion!=null}"
+                         th:text="${orderdetails.order.promotion.name + ' - ' + orderdetails.order.promotion.discount+'%'}"></p>
+                      <p th:if="${orderdetails.order.promotion==null}">None </p>
+                    </td>
+                    <td style="text-align: center" class="">
+                      <div th:switch="${orderdetails.order.paymentMethod}">
+                        <p th:case="'0'">Thanh toán khi nhận hàng</p>
+                        <p th:case="'1'">Chuyển khoản</p>
+                      </div>
+                    </td>
+                    <td>
+                      <p class="price" th:if="${orderdetails.order.promotion!=null}"
+                         th:text="${(orderdetails.price.longValue() * orderdetails.quantity *(100 - orderdetails.order.promotion.discount)/100)}+' VND'"
+                         th:attr="data-price=${(orderdetails.price.longValue() * orderdetails.quantity *(100 - orderdetails.order.promotion.discount)/100)}"></p>
+                      <p class="price" th:if="${orderdetails.order.promotion==null}"
+                         th:text="${(orderdetails.price.longValue() * orderdetails.quantity)}+' VND'"
+                         th:attr="data-price=${(orderdetails.price.longValue() * orderdetails.quantity)}"></p>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section> <!--/#cart_items-->
+        </div>
+      </div>
+    </div>
+    <!--************************************
+            News Grid End
+    *************************************-->
+  </main>
+  <!--************************************
+          Main End
+  *************************************-->
+  <!--************************************
+          Footer Start
+  *************************************-->
+  <th:block th:replace="layout_customer/footer :: footer_customer"></th:block>
+  <!--************************************
+          Footer End
+  *************************************-->
+</div>
+<!--************************************
+        Wrapper End
+*************************************-->
+<th:block th:replace="layout_customer/js :: js"></th:block>
+</body>
+
+</html>

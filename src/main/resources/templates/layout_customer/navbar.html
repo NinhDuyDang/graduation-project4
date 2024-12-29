@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:fragment="navbar">
+    <!--************************************
+                    Header Start
+            *************************************-->
+    <header id="tg-header" class="tg-header tg-haslayout">
+        <div class="tg-topbar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <ul class="tg-addnav">
+                            <li>
+                                <a href="javascript:void(0);">
+                                    <i class="icon-envelope"></i>
+                                    <em>Contact</em>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);">
+                                    <i class="icon-question-circle"></i>
+                                    <em>Help</em>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="dropdown tg-themedropdown tg-currencydropdown">
+                            <a href="javascript:void(0);" id="tg-currenty" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="icon-earth"></i>
+                                <span>Currency</span>
+                            </a>
+                            <ul class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-currenty">
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <i>£</i>
+                                        <span>British Pound</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <i>$</i>
+                                        <span>Us Dollar</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <i>€</i>
+                                        <span>Euro</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tg-userlogin">
+                            <figure><a href="javascript:void(0);" th:if="${user != null and user.username != null}"><img th:src="@{${user.customer.getImage()}}" alt="image"></a></figure>
+                            <th:block sec:authorize="isAuthenticated()">
+                                <span th:text="'Xin chào, ' + ${#authentication.name}"></span>
+                            </th:block>
+                            <th:block sec:authorize="!isAuthenticated()">
+                                <span>Đăng nhập</span>
+                            </th:block>
+                            <!-- Dropdown menu -->
+                            <div class="dropdown-menu">
+                                <th:block sec:authorize="!isAuthenticated()">
+                                    <a th:href="@{/login}">Đăng nhập</a>
+                                </th:block>
+                                <th:block sec:authorize="isAuthenticated()">
+                                    <a th:href="@{/customeruser/edit/}"><i class="fa fa-user"></i> Tài khoản</a>
+                                    <a th:href="@{/myorder}"><i class="fa fa-shopping-cart"></i> Lịch sử mua hàng </a>
+                                    <a th:href="@{/logout}">Đăng xuất</a>
+                                </th:block>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tg-middlecontainer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <strong class="tg-logo"><a th:href="@{/}"><img th:src="@{/images/logo.png}" alt="company name here"></a></strong>
+                        <div class="tg-wishlistandcart">
+                            <div class="dropdown tg-themedropdown tg-wishlistdropdown">
+                                <div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-wishlisst">
+                                    <div class="tg-description"><p>No products were added to the wishlist!</p></div>
+                                </div>
+                            </div>
+                            <div class="dropdown tg-themedropdown tg-minicartdropdown">
+                                <a href="javascript:void(0);" id="tg-minicart" class="tg-btnthemedropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="tg-themebadge" th:text="${size_carts}"></span>
+                                    <i class="icon-cart"></i>
+                                    <span class="price" th:text="${subtotal}" th:attr="data-price=${subtotal}"></span>
+                                </a>
+                                <div class="dropdown-menu tg-themedropdownmenu" aria-labelledby="tg-minicart" style="padding: 20px">
+                                    <th:block th:if="${listCart != null and listCart.size() > 0}">
+                                        <div class="tg-minicartbody" th:each="cart : ${listCart}">
+                                            <div class="tg-minicarproduct">
+                                                <figure style="max-width: 110px;">
+                                                    <img th:src="${cart.product.image}" alt="image description">
+                                                </figure>
+                                                <div class="tg-minicarproductdata">
+                                                    <h5 th:text="${cart.product.name}"></h5>
+                                                    <h6 class="price" th:text="${cart.product.price}+' VND'" th:attr="data-price=${cart.product.price}"></h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </th:block>
+                                    <th:block th:if="${listCart == null or listCart.size() == 0}">
+                                        <h4 style="text-align: center; color: red"> Giỏ hàng trống, <a th:href="@{/product/listproducts}">Mua sắm ngay!</a></h4>
+                                    </th:block>
+                                    <div class="tg-minicartfoot">
+                                        <a class="tg-btnemptycart" th:href="@{/cart/clearCart}">
+                                            <i class="fa fa-trash-o"></i>
+                                            <span>Xoá giỏ hàng</span>
+                                        </a>
+                                        <span class="tg-subtotal">Tổng phụ: <strong class="price" th:text="${subtotal}+ ' VND'" th:attr="data-price=${subtotal}"></strong></span>
+                                        <div class="tg-btns">
+                                            <a class="tg-btn tg-active" th:href="@{/cart/}">Xem giỏ hàng</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tg-searchbox">
+                            <form class="tg-formtheme tg-formsearch" th:action="@{'/product/listproducts'}">
+                                <fieldset>
+                                    <input th:value="${keyword}" type="text" name="keyword" id="keyword" class="typeahead form-control" placeholder="Tìm kiếm sản phẩm ">
+                                    <input type="hidden" name="categoryId" th:value="${categoryId}"/>
+                                    <button type="submit"><i class="icon-magnifier"></i></button>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tg-navigationarea">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <nav id="tg-nav" class="tg-nav">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#tg-navigation" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                            <div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
+                                <ul>
+                                    <li class="menu-item-has-children menu-item-has-mega-menu">
+                                        <a href="javascript:void(0);">Danh mục sản phẩm</a>
+                                        <div class="mega-menu">
+                                            <ul>
+                                                <li th:each="category:${categoryList}">
+                                                    <a th:href="@{'/product/listproducts/1?categoryId='+${category.getId()}+'&sortField='
+                                +${sortField}+'&sortDir='+ ${sortDir}+'&keyword= '}"><span th:text="${category.getName()}"></span>
+                                                        <em th:text="${category.products.size()}"></em></a></li>
+                                                <li><a th:href="@{'/product/listproducts/1?categoryId=-1&sortField='
+                                +${sortField}+'&sortDir='+ ${sortDir}+'&keyword= '}"><span>Tất cả sách</span></a></li>
+                                            </ul>
+
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/}">Trang chủ</a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/about}">Về chúng tôi</a>
+                                    </li>
+                                    <li><a th:href="@{/product/listproducts}">Sản phầm</a></li>
+                                    <li class="menu-item-has-children">
+                                        <a href="javascript:void(0);">Hỗ trợ khách hàng</a>
+                                        <ul class="sub-menu">
+                                            <li><a th:href="@{/about/support1}">Hướng dẫn đặt hàng</a></li>
+                                            <li><a th:href="@{/about/support2}">Hình thức vận chuyển</a></li>
+                                            <li><a th:href="@{/about/support3}">Hướng dẫn thanh toán</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a>Đường dây nóng 0982.768.246</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--************************************
+            Header End
+    *************************************-->
+</th:block>
+</body>
+</html>

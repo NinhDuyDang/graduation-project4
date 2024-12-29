@@ -1,0 +1,349 @@
+<!doctype html>
+<html class="no-js" lang=""
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Book Library</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <th:block th:replace="layout_customer/head :: head"></th:block>
+    <style>
+        /* General Styling */
+        #cart_items .container {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Receiver Information Form */
+        .shopper-informations {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 60%;
+            margin: 20px auto;
+        }
+
+        .bill-to p {
+            font-size: 18px;
+            color: #e67e22;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .form-one label {
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .form-one input[type="text"], .form-one select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .form-one button {
+            background-color: #3498db;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        .form-one button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Cart Table Styling */
+        .cart_info .table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .table th, .table td {
+            text-align: center;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f1f1f1;
+            color: #333;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .cart_product img {
+            width: 100px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .cart_total p, .price {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        /* Total Result Table Styling */
+        .total-result {
+            margin-top: 20px;
+        }
+
+        .total-result td {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .total-result .price {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        .shipping-cost td {
+            font-size: 14px;
+            color: #555;
+        }
+
+        /* Review & Payment Heading */
+        .review-payment h2 {
+            font-size: 22px;
+            color: #333;
+            font-weight: bold;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            .shopper-informations {
+                width: 90%;
+            }
+
+            .table th, .table td {
+                padding: 10px;
+                font-size: 12px;
+            }
+
+            .form-one input[type="text"], .form-one select {
+                padding: 8px;
+            }
+
+            .form-one button {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+    <!--************************************
+            Header Start
+    *************************************-->
+    <div th:include="layout_customer/navbar:: navbar"></div>
+    <!--************************************
+            Header End
+    *************************************-->
+    <!--************************************
+            Inner Banner Start
+    *************************************-->
+    <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" th:attr="data-image-src=@{/images/parallax/bgparallax-07.jpg}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="tg-innerbannercontent">
+                        <h1>Thanh toán</h1>
+                        <ol class="tg-breadcrumb">
+                            <li><a href="javascript:void(0);">Trang chủ</a></li>
+                            <li class="tg-active">Thanh toán</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--************************************
+            Inner Banner End
+    *************************************-->
+    <!--************************************
+            Main Start
+    *************************************-->
+    <main id="tg-main" class="tg-main tg-haslayout">
+        <!--************************************
+                News Grid Start
+        *************************************-->
+        <div class="tg-sectionspace tg-haslayout">
+            <div class="container">
+                <div class="row">
+                    <section id="cart_items">
+                        <div class="container">
+                            <div class="shopper-informations" >
+                                <div  >
+                                    <div class="clearfix" style="border: 1px solid rgba(0, 0, 0, 0.1); width: 50%; margin: 0 auto;
+                 border-radius: 15px; padding: 20px; box-shadow: 5px 3px 5px rgb(0 0 0 / 10%);">
+                                        <div class="bill-to" style="width: 100%">
+                                            <p style="font-weight: bold; color: orange; text-align: center">Thông tin người nhận</p>
+                                            <div class="form-one" style="width: 100%">
+                                                <form id="orderForm" th:object="${order}" method="post" th:action="@{/cart/saveOrder}">
+                                                    <label>Tên người nhận</label>
+                                                    <input type="text" value="Ninh Duy Đăng " placeholder="Receiver Name" th:field="*{receiverName}" required>
+
+                                                    <label>Số điện thoại</label>
+                                                    <input type="text" placeholder="Phone" th:field="*{receiverPhone}" value="0366924065" required>
+
+                                                    <label>Địa chỉ</label>
+                                                    <input type="text" placeholder="Address" th:field="*{receiverAddress}" value="Số 1 Đại Cổ Việt Hai Bà Trưng, Hà Nội" required>
+
+                                                    <label>Phương thức thanh toán</label>
+                                                    <select id="paymentMethodSelect" th:field="*{paymentMethod}" style="height: 40px">
+                                                        <option value="0">Thanh toán khi nhận hàng</option>
+                                                        <option value="1">Chuyển khoản</option>
+                                                        <option value="2">VnPay</option>
+                                                    </select>
+
+                                                    <label style="margin-top: 10px">Đơn vị vận chuyển</label>
+                                                    <select th:field="*{shippingUnit}" style="height: 40px">
+                                                        <option th:each="shippingunit:${shippingUnitlist}" th:value="${shippingunit.id}" th:utext="${shippingunit.name}"></option>
+                                                    </select>
+
+                                                    <input th:if="${promotion != null}" type="hidden" name="promotionCode" th:value="${promotion.code}">
+                                                    <input th:if="${promotion == null}" type="hidden" name="promotionId" th:value="${0}">
+                                                    <input type="hidden" name="totalprice" th:value="${total}">
+
+                                                    <button type="submit" class="btn btn-default check_out">Thanh toán</button>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="review-payment">
+                                <h2>Xem lại đơn hàng</h2>
+                            </div>
+
+                            <div class="table-responsive cart_info">
+                                <table class="table table-condensed">
+                                    <thead>
+                                    <tr class="cart_menu">
+                                        <td class="image">Sản phẩm</td>
+                                        <td class="description">Tên sản phẩm</td>
+                                        <td class="pric">Giá</td>
+                                        <td class="quantity">Số lượng</td>
+                                        <td class="total">Tổng cộng</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <th:block th:if="${listCart.size()>0}">
+                                        <tr th:each="cart : ${listCart}">
+                                            <td class="cart_product">
+                                                <a href=""><img style="width: 100px;" th:src="${cart.product.image}"></a>
+                                            </td>
+                                            <td class="cart_description" style="width: 30%; padding-right: 5px;">
+                                                <h4><a href="" th:text="${cart.product.name}"></a></h4>
+                                            </td>
+                                            <td class="price_td">
+                                                <p class="price" th:text="${cart.product.price}+' VND'" th:attr="data-price=${cart.product.price}"></p>
+                                            </td>
+                                            <td class="cart_quantity">
+                                                <h4 th:text="${cart.quantity}"></h4>
+                                            </td>
+                                            <td class="cart_total">
+                                                <p class="price" th:id="'total'+${cart.id}"
+                                                   th:text="${cart.product.price * cart.quantity}+' VND'" th:attr="data-price=${cart.product.price * cart.quantity}"></p>
+                                            </td>
+                                            <input type="hidden" th:id="'maxQuantity'+${cart.id}" th:value="${cart.product.quantity}">
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4">&nbsp;</td>
+                                            <td colspan="2">
+                                                <table class="table table-condensed total-result">
+                                                    <tr>
+                                                        <td>Tổng phụ trong giỏ</td>
+                                                        <td><span class="price" th:text="${subtotal}" th:attr="data-price=${subtotal}"></span></td>
+                                                    </tr>
+                                                    <tr class="shipping-cost">
+                                                        <td>Chi phí vận chuyển</td>
+                                                        <td>Miễn phí</td>
+                                                    </tr>
+                                                    <tr class="shipping-cost">
+                                                        <td>Mã giảm giá</td>
+                                                        <td th:if="${promotion!=null}" th:text="${promotion.discount}+'%' +' ( max: ' + ${promotion.maxdiscount} +' $ )'"></td>
+                                                        <td th:if="${promotion==null}">Không có mã giảm giá </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Total</td>
+                                                        <td><span class="price" th:text="${total}" th:attr="data-price=${total}"></span></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </section> <!--/#cart_items-->
+                </div>
+            </div>
+        </div>
+        <!--************************************
+                News Grid End
+        *************************************-->
+    </main>
+    <!--************************************
+            Main End
+    *************************************-->
+    <!--************************************
+            Footer Start
+    *************************************-->
+    <th:block th:replace="layout_customer/footer :: footer_customer"></th:block>
+    <!--************************************
+            Footer End
+    *************************************-->
+</div>
+<!--************************************
+        Wrapper End
+*************************************-->
+<th:block th:replace="layout_customer/js :: js"></th:block>
+<script>
+    // Lắng nghe sự thay đổi trong lựa chọn phương thức thanh toán
+    document.getElementById('paymentMethodSelect').addEventListener('change', function() {
+        var form = document.getElementById('orderForm');
+        var paymentMethod = this.value;
+
+        // Kiểm tra nếu phương thức thanh toán là VnPay
+        if (paymentMethod == '2') {
+            form.action = '/payment/create_payment'; // Đặt hành động form thành /payment/create_payment
+        } else {
+            form.action = '/cart/saveOrder'; // Đặt hành động form thành /cart/saveOrder nếu không phải VnPay
+        }
+    });
+</script>
+</body>
+
+</html>

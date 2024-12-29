@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+  <meta charset="utf-8">
+  <title>Admin - Edit Category</title>
+  <th:block th:replace="layout_admin/head_admin :: head_admin"></th:block>
+</head><!--/head-->
+<body>
+<div class="wrapper row-offcanvas row-offcanvas-left">
+  <div th:include="layout_admin/navbar_admin :: navbar_admin"></div>
+  <div style="display: flex">
+    <div th:include="layout_admin/sidebar_admin :: sidebar_admin"></div>
+    <div class="container" style="padding: 0; position: relative">
+      <div class="container row">
+        <div class="row col-sm-6"
+             style="border: 1px darkgrey solid; border-radius: 10px; margin: 0; padding: 20px;">
+          <div class="col-sm-12">
+            <div style="display: flex; justify-content: space-between;">
+              <h2 class="myclass">Chỉnh sửa sản phẩm</h2>
+              <div>
+                <img style="width: 100px" th:src="${product.image}"/>
+              </div>
+            </div>
+            <form th:action="@{/admin/product/save}" th:object="${product}" method="post"
+                  enctype="multipart/form-data">
+              <input type="hidden" th:field="*{createdAt}">
+              <input type="hidden" th:field="*{count}">
+              <div class="form-group">
+                <label>Id</label>
+                <input th:field="*{id}" type="text" class="form-control"
+                       name="id" placeholder="Nhập id..." id="id" value="" readonly>
+              </div>
+              <div class="form-group">
+                <label>Tên sản phẩm</label>
+                <input th:field="*{name}" type="text" class="form-control"
+                       name="name" placeholder="Nhập tên sản phảm..." id="name" value="" required>
+              </div>
+              <div class="form-group">
+                <label>Tên tác giả</label>
+                <input th:field="*{author}" type="text" class="form-control"
+                       name="name" placeholder="Nhập tên tác giả..." id="author" value="" required>
+              </div>
+              <div class="form-group">
+                <label>Mô tả</label>
+                <input th:field="*{description}" type="text" class="form-control"
+                       name="name" placeholder="Nhập mô tả sản phẩm..." id="description" value="" required>
+              </div>
+              <tr>
+                <td>Danh mục:</td>
+                <td><select th:field="*{category}" class="form-select"
+                            aria-label="Default select example">
+                  <option th:each="cate :${listCategory}" th:value="${cate.id}"
+                          th:text="${cate.name}"></option>
+                </select></td>
+              </tr>
+              <div class="form-group">
+                <label>Ảnh</label>
+                <input th:field="*{image}" type="text" class="form-control"
+                       name="name" placeholder="Nhập link ảnh..." id="image" value="" required>
+              </div>
+              <div class="form-group">
+                <label>Giá</label>
+                <input th:field="*{price}" type="text" class="form-control"
+                       name="name" placeholder="Nhập giá..." id="price" value="" required>
+              </div>
+              <div class="form-group">
+                <label>Trạng thái</label>
+                <select th:field="*{status}" class="form-select">
+                  <option th:value='0' th:text="Disable"></option>
+                  <option th:value='1' th:text="Enable"></option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Số lượng</label>
+                <input th:field="*{quantity}" type="text" class="form-control"
+                       name="name" placeholder="Nhập số lượng..." id="quantity" value="" required>
+              </div>
+              <br>
+              <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+              <a class="btn btn-primary" href="/admin/product">Quay lại trang sản phẩm</a>
+            </form>
+          </div>
+        </div>
+        <div style="text-align: center" class="col-sm-6">
+          <h2>Thêm ảnh sản phẩm</h2>
+          <div>
+            <form th:action="@{'/admin/product/saveImage/'+${product.id}}" th:object="${productImage}"
+                  method="post"
+                  style="margin: 20px 0">
+              <tr>
+                <td>Link sản phẩm:</td>
+                <td><input type="text" th:field="*{image}" required/></td>
+                <td colspan="2">
+                  <button type="submit">Lưu</button>
+                </td>
+              </tr>
+            </form>
+          </div>
+          <div style="text-align: center; max-height: 700px; overflow-y: scroll;">
+            <table class="table table-bordered">
+              <thead>
+              <tr style="text-align: center; background-color: orange; color: #fff">
+                <th style="text-align: center">Ảnh</th>
+                <th style="text-align: center">Hành động</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="image:${productImageList}">
+                <td><a th:href="@{${image.image}}"> <img th:src="@{${image.image}}" width="30px"></a></td>
+                <td style="text-align: center">
+                  <a th:href="@{'/admin/product/deleteImage/'+${image.id}}"
+                     class="btn btn-danger btn-sm">Xóa</a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<th:block th:replace="layout_admin/js_admin :: js_admin"></th:block>
+</body>
+</html>

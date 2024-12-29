@@ -1,0 +1,280 @@
+<!doctype html>
+<html class="no-js" lang=""
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Book Library</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <th:block th:replace="layout_customer/head :: head"></th:block>
+</head>
+<body>
+
+<div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+    <!--************************************
+            Header Start
+    *************************************-->
+    <div th:include="layout_customer/navbar:: navbar"></div>
+    <!--************************************
+            Header End
+    *************************************-->
+    <!--************************************
+            Inner Banner Start
+    *************************************-->
+    <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" th:attr="data-image-src=@{/images/parallax/bgparallax-07.jpg}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="tg-innerbannercontent">
+                        <h1>Hướng dẫn thanh toán</h1>
+                        <ol class="tg-breadcrumb">
+                            <li><a href="javascript:void(0);">Trang chủ</a></li>
+                            <li class="tg-active">Hướng dẫn thanh toán</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--************************************
+            Inner Banner End
+    *************************************-->
+    <!--************************************
+            Main Start
+    *************************************-->
+    <main id="tg-main" class="tg-main tg-haslayout">
+        <!--************************************
+                News Grid Start
+        *************************************-->
+        <div class="container">
+            <section class="mt-60 mb-60">
+                <div class="ck-content">
+                    <p
+                            style="background-color:rgb(255,255,255);color:rgb(62,63,49);font-family:'HelveticaNeue-Light';font-size:14px;font-style:normal;font-weight:400;line-height:1.5;margin:0px 0px 10px;text-align:justify;word-spacing:0px;">
+                <span style="color:rgb(0,0,0);"><span
+                        style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                        style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">Mua sách tại
+                            Website</strong></span> </span><strong
+                            style="background-color:rgb(255,255,255);color:rgb(0,128,0);font-family:HelveticaNeue;font-size:18.6667px;font-style:normal;line-height:1.5;margin:0px;text-align:justify;word-spacing:0px;">HaNoiBookStore</strong><span
+                            style="color:rgb(0,128,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">.</strong></span> </span><span
+                            style="color:rgb(255,102,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">com</strong></span> </span>
+                        <span
+                                style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                                style="font-family:HelveticaNeue;line-height:1.5;margin:0px;"> </strong></span> <span
+                            style="color:rgb(0,0,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">quý khách có thể thanh toán
+                            bằng các hình thức sau:</strong></span> </span><span style="color:rgb(255,0,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">Thanh toán trực
+                            tiếp</strong></span> </span><span style="color:rgb(0,0,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">khi nhận hàng (COD)
+                            và</strong></span> </span><span style="color:rgb(255,0,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">thanh toán qua ngân
+                            hàng.</strong></span> </span></p>
+                    <p
+                            style="background-color:rgb(255,255,255);color:rgb(62,63,49);font-family:'HelveticaNeue-Light';font-size:14px;font-style:normal;font-weight:400;line-height:1.5;margin:0px 0px 10px;word-spacing:0px;">
+                <span style="color:rgb(0,0,255);"><b style="font-family:HelveticaNeue;line-height:1.5;margin:0px;"><span
+                        style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                        style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">1. Thanh toán qua tài
+                                khoản ngân hàng:</strong></span><strong> </strong></b></span> <br><b
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;"><u
+                            style="line-height:1.5;margin:0px;">Hướng dẫn</u></strong></span><strong>
+                    </strong></b><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;">:
+                </span><span style="color:rgb(0,0,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;">Sau
+                        khi hoàn tất đặt hàng, xin vui lòng chuyển tiền vào tài khoản của</span> </span><span
+                            style="color:rgb(0,128,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">HaNoiBookStore.</strong></span>
+                </span><span style="color:rgb(255,102,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">com</strong></span>
+                </span><span style="color:rgb(0,0,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;">tại
+                        ngân hàng dưới đây.</span> </span></p>
+                    <p
+                            style="background-color:rgb(255,255,255);color:rgb(62,63,49);font-family:'HelveticaNeue-Light';font-size:14px;font-style:normal;font-weight:400;line-height:1.5;margin:0px 0px 10px;text-align:justify;word-spacing:0px;">
+                <span style="color:rgb(255,0,0);"><b style="font-family:HelveticaNeue;line-height:1.5;margin:0px;"><span
+                        style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                        style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">Chủ tài
+                                khoản:</strong></span><strong> </strong></b><span
+                        style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;">
+                        <strong>Nguyễn Ngọc Tuấn</strong></span> </span></p>
+                    <p
+                            style="background-color:rgb(255,255,255);color:rgb(62,63,49);font-family:'HelveticaNeue-Light';font-size:14px;font-style:normal;font-weight:400;line-height:1.5;margin:0px 0px 10px;text-align:justify;word-spacing:0px;">
+                <span style="color:rgb(255,0,0);"><b style="font-family:HelveticaNeue;line-height:1.5;margin:0px;"><span
+                        style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                        style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">Số tài khoản:
+                            </strong></span><strong> </strong></b><span
+                        style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong>0451000262052</strong></span>
+                </span></p>
+                    <p
+                            style="background-color:rgb(255,255,255);color:rgb(62,63,49);font-family:'HelveticaNeue-Light';font-size:14px;font-style:normal;font-weight:400;line-height:1.5;margin:0px 0px 10px;text-align:justify;word-spacing:0px;">
+                <span style="color:rgb(255,0,0);"><span
+                        style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                        style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">Ngân hàng Vietcombank (
+                            VCB</strong> <strong
+                        style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">)</strong></span> </span></p>
+                    <p
+                            style="background-color:rgb(255,255,255);color:rgb(62,63,49);font-family:'HelveticaNeue-Light';font-size:14px;font-style:normal;font-weight:400;line-height:1.5;margin:0px 0px 10px;text-align:justify;word-spacing:0px;">
+                <span style="color:rgb(0,0,0);"><b
+                        style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><span
+                        style="line-height:1.5;margin:0px;"><strong
+                        style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">a. Chuyển khoản ngân hàng
+                                qua internetbanking</strong></span><strong> </strong></b></span><span
+                            style="color:rgb(255,0,0);"><b
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><span
+                            style="line-height:1.5;margin:0px;"><strong
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">(Quý khách tự thanh toán
+                                chi phí chuyển khoản)</strong></span><strong> </strong></b></span></p>
+                    <p
+                            style="background-color:rgb(255,255,255);color:rgb(62,63,49);font-family:'HelveticaNeue-Light';font-size:14px;font-style:normal;font-weight:400;line-height:1.5;margin:0px 0px 10px;text-align:justify;word-spacing:0px;">
+                <span style="color:rgb(0,0,0);"><span
+                        style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;">Quý
+                        khách vui lòng đăng nhập vào hệ thống internetbanking của ngân hàng và chuyển khoản cho</span>
+                </span><span style="color:rgb(0,128,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">HaNoiBookStore.</strong></span>
+                </span><span style="color:rgb(255,102,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">com</strong></span>
+                </span><span style="color:rgb(0,0,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;">theo
+                        thông tin tài khoản bên trên</span> </span> <br><span style="color:rgb(0,0,0);"><b
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;"><em
+                            style="line-height:1.5;margin:0px;"><i><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">b.
+                                    </strong></span></i></em><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">Chuyển khoản tại cây
+                                ATM</strong></span><strong> </strong></b></span><span style="color:rgb(255,0,0);"><b
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">(Qúy khách tự thanh toán
+                                phí chuyển khoản)</strong></span><strong> </strong></b></span></p>
+                    <p
+                            style="background-color:rgb(255,255,255);color:rgb(62,63,49);font-family:'HelveticaNeue-Light';font-size:14px;font-style:normal;font-weight:400;line-height:1.5;margin:0px 0px 10px;text-align:justify;word-spacing:0px;">
+                <span style="color:rgb(0,0,0);"><span
+                        style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;">Khi
+                        chuyển khoản, quý khách vui lòng ghi lại Mã số Đơn hàng được thanh toán vào phần ghi chú của
+                        lệnh chuyển khoản. Sau đó thông báo</span> </span><span style="color:rgb(0,128,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">HaNoiBookStore.</strong></span>
+                </span><span style="color:rgb(255,102,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">com
+                        </strong></span></span><span style="color:rgb(0,0,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">qua Địa chỉ Mail
+                        </strong></span></span><span style="color:rgb(255,0,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">(</strong></span> </span><span
+                            style="color:rgb(0,128,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">tuancuongbkpro
+                        </strong></span></span><span style="color:rgb(255,0,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">@gmail.com)</strong></span>
+                </span> <span style="color:rgb(0,0,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;">hoặc
+                        gọi đến số</span> </span><span style="color:rgb(255,0,0);"><b
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">0982.768.246</strong></span><strong>
+                        </strong></b></span></p>
+                    <p
+                            style="background-color:rgb(255,255,255);color:rgb(62,63,49);font-family:'HelveticaNeue-Light';font-size:14px;font-style:normal;font-weight:400;line-height:1.5;margin:0px 0px 10px;text-align:justify;word-spacing:0px;">
+                <span style="color:rgb(0,0,0);"><b style="font-family:HelveticaNeue;line-height:1.5;margin:0px;"><span
+                        style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                        style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">c. Nộp tiền tại chi nhánh
+                                ngân hàng (Quý khách tự thanh toán chi phí chuyển tiền)</strong></span><strong>
+                        </strong></b></span> <br><span style="color:rgb(0,0,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;">Quý
+                        khách vào ngân hàng bất kỳ và gửi tiền cho </span></span><span style="color:rgb(0,128,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">HaNoiBookStore.</strong></span>
+                </span><span style="color:rgb(255,102,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">com
+                        </strong></span></span><span style="color:rgb(0,0,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;">theo
+                        tài khoản bên trên.</span> </span></p>
+                    <p
+                            style="background-color:rgb(255,255,255);color:rgb(62,63,49);font-family:'HelveticaNeue-Light';font-size:14px;font-style:normal;font-weight:400;line-height:1.5;margin:0px 0px 10px;text-align:justify;word-spacing:0px;">
+                <span style="color:rgb(0,0,0);"><span
+                        style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;">Đơn
+                        hàng của Quý khách sẽ được xử lý trong 24 giờ làm việc từ khi tiền đã chuyển vào tài khoản
+                    </span></span><span style="color:rgb(0,128,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">HaNoiBookStore.</strong></span>
+                </span><span style="color:rgb(255,102,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><strong
+                            style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">com</strong></span>
+                </span><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;">.</span>
+                    </p>
+                    <p
+                            style="background-color:rgb(255,255,255);color:rgb(62,63,49);font-family:'HelveticaNeue-Light';font-size:14px;font-style:normal;font-weight:400;line-height:1.5;margin:0px 0px 10px;text-align:justify;word-spacing:0px;">
+                <span style="color:rgb(0,0,255);"><b
+                        style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;"><span
+                        style="line-height:1.5;margin:0px;"><strong
+                        style="font-family:HelveticaNeue;line-height:1.5;margin:0px;">2. Thanh toán bằng tiền
+                                mặt tại chỗ khi nhận hàng.</strong></span><strong> </strong></b></span></p>
+                    <p
+                            style="background-color:rgb(255,255,255);color:rgb(62,63,49);font-family:'HelveticaNeue-Light';font-size:14px;font-style:normal;font-weight:400;line-height:1.5;margin:0px 0px 10px;text-align:justify;word-spacing:0px;">
+                <span style="color:rgb(0,0,0);"><span
+                        style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;">–
+                        Đối với khách hàng trong nội thành Hà Nội: Khách hàng nhận hàng và thanh toán tại chỗ cho nhân
+                        viên giao hàng.</span> </span></p>
+                    <p
+                            style="background-color:rgb(255,255,255);color:rgb(62,63,49);font-family:'HelveticaNeue-Light';font-size:14px;font-style:normal;font-weight:400;line-height:1.5;margin:0px 0px 10px;text-align:justify;word-spacing:0px;">
+                <span style="color:rgb(0,0,0);"><span
+                        style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;">–
+                        Đối với khách hàng ở Ngoại thành Hà Nội và các tỉnh thành khác:</span> </span> <span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;">
+                </span> <span style="color:rgb(0,0,0);"><span
+                            style="font-family:'times new roman', times, serif;font-size:14pt;line-height:1.5;margin:0px;">Quý
+                        khách nhận hàng và thanh toán tại chỗ cho người giao hàng (nhân viên bưu điện, chuyển phát…)
+                        theo đúng hóa đơn, ngoài ra quý khách không phải thanh toán thêm bất cứ chi phí nào khác.</span>
+                </span></p>
+                </div>
+            </section>
+
+        </div>
+        <!--************************************
+                News Grid End
+        *************************************-->
+    </main>
+    <!--************************************
+            Main End
+    *************************************-->
+    <!--************************************
+            Footer Start
+    *************************************-->
+    <th:block th:replace="layout_customer/footer :: footer_customer"></th:block>
+    <!--************************************
+            Footer End
+    *************************************-->
+</div>
+<!--************************************
+        Wrapper End
+*************************************-->
+<th:block th:replace="layout_customer/js :: js"></th:block>
+</body>
+
+</html>

@@ -1,0 +1,134 @@
+<!doctype html>
+<html class="no-js" lang=""
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Book Library</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <th:block th:replace="layout_customer/head :: head"></th:block>
+</head>
+<body>
+
+<div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+    <!--************************************
+            Header Start
+    *************************************-->
+    <div th:include="layout_customer/navbar:: navbar"></div>
+    <!--************************************
+            Header End
+    *************************************-->
+    <!--************************************
+            Inner Banner Start
+    *************************************-->
+    <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" th:attr="data-image-src=@{/images/parallax/bgparallax-07.jpg}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="tg-innerbannercontent">
+                        <h1>Tài khoản</h1>
+                        <ol class="tg-breadcrumb">
+                            <li><a href="javascript:void(0);">Trang chủ</a></li>
+                            <li class="tg-active">Tài khoản</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--************************************
+            Inner Banner End
+    *************************************-->
+    <!--************************************
+            Main Start
+    *************************************-->
+    <main id="tg-main" class="tg-main tg-haslayout">
+        <!--************************************
+                News Grid Start
+        *************************************-->
+        <div class="tg-sectionspace tg-haslayout">
+            <div class="container">
+                <div class="row">
+                    <div class="row"
+                         style="border: 1px darkgrey solid; border-radius: 10px; width: 50%; margin: 0 auto; padding: 20px;">
+                        <div class="col-sm-12">
+
+                            <div style="display: flex; justify-content: space-between">
+                                <h2 class="myclass">Chỉnh sửa tài khoản</h2>
+                                <img class="img-rounded" style="width: 100px;" th:src="@{${user.customer.getImage()}}" alt="image">
+                            </div>
+                            <form th:action="@{/customeruser/save}" th:object="${user}" method="post"
+                                  enctype="multipart/form-data">
+                                <input type="hidden" th:field="*{id}">
+                                <input type="hidden" th:field="*{customer.id}">
+                                <input type="hidden" th:field="*{staff.id}">
+                                <input type="hidden" th:field="*{role.id}">
+                                <input type="hidden" th:field="*{password}">
+                                <input type="hidden" th:field="*{customer.createdAt}">
+                                <input type="hidden" th:field="*{createdAt}">
+                                <input type="hidden" th:field="*{customer.status}">
+                                <input type="hidden" th:field="*{customer.point}">
+                                <div class="form-group">
+                                    <label>Họ và tên</label>
+                                    <input th:field="*{customer.name}" type="text" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tên đăng nhập</label>
+                                    <input th:field="*{username}" type="text" class="form-control" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Gmail</label>
+                                    <input th:field="*{customer.email}" type="text" class="form-control" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Số điện thoại</label>
+                                    <input th:field="*{customer.phone}" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Địa chỉ</label>
+                                    <input th:field="*{customer.address}" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Ngày sinh</label>
+                                    <input th:field="*{customer.birthday}" type="date" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Ảnh đại diện</label>
+                                    <input type="file" name="image" id="image" max-file-size="5.120"
+                                           accept="image/png, image/jpeg" class="file-input">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                                <a class="btn btn-primary" href="/changePassword">Thay đổi mật khẩu</a>
+                                <a class="btn btn-primary" href="/product/listproducts">Quay lại</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--************************************
+                News Grid End
+        *************************************-->
+    </main>
+    <!--************************************
+            Main End
+    *************************************-->
+    <!--************************************
+            Footer Start
+    *************************************-->
+    <th:block th:replace="layout_customer/footer :: footer_customer"></th:block>
+    <!--************************************
+            Footer End
+    *************************************-->
+</div>
+<!--************************************
+        Wrapper End
+*************************************-->
+<th:block th:replace="layout_customer/js :: js"></th:block>
+</body>
+
+</html>

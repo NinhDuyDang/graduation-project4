@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>Admin - Thêm danh mục</title>
+  <th:block th:replace="layout_admin/head_admin :: head_admin"></th:block>
+</head><!--/head-->
+<body>
+<div class="wrapper row-offcanvas row-offcanvas-left">
+  <th:block th:replace="layout_admin/navbar_admin :: navbar_admin"></th:block>
+  <div style="display: flex">
+    <th:block th:replace="layout_admin/sidebar_admin :: sidebar_admin"></th:block>
+    <div class="container" style="padding: 0; position: relative">
+      <div class="container">
+        <div class="row"
+             style="border: 1px darkgrey solid; border-radius: 10px; width: 50%; margin: 0 auto; padding: 20px;">
+          <div class="col-sm-12">
+            <h2 class="myclass">Thêm danh mục</h2>
+            <form th:action="${addcategory}" th:object="${category}" method="post"
+                  enctype="multipart/form-data">
+              <div class="form-group">
+                <label>Tên danh mục</label>
+                <input th:field="*{name}" type="text" class="form-control"
+                       name="name" placeholder="Nhập tên danh mục..." id="name" value="" required>
+              </div>
+              <span th:text="${alert}" style="color:red"></span>
+              <br>
+              <button type="submit" class="btn btn-primary">Lưu</button>
+              <a class="btn btn-primary" href="/admin/category/listCategory">Quay lại màn hình danh mục</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<th:block th:replace="layout_admin/js_admin :: js_admin"></th:block>
+</body>
+</html>

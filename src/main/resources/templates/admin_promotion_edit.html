@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8">
+    <title>Admin - Edit Category</title>
+    <th:block th:replace="layout_admin/head_admin :: head_admin"></th:block>
+</head><!--/head-->
+<body>
+<div class="wrapper row-offcanvas row-offcanvas-left">
+    <div th:include="layout_admin/navbar_admin :: navbar_admin"></div>
+    <div style="display: flex">
+        <div th:include="layout_admin/sidebar_admin :: sidebar_admin"></div>
+        <div class="container" style="padding: 0; position: relative">
+            <div class="container">
+                <div class="row"
+                     style="border: 1px darkgrey solid; border-radius: 10px; width: 50%; margin: 0 auto; padding: 20px;">
+                    <div class="col-sm-12">
+                        <h2 class="myclass">Chỉnh sửa mã giảm giá</h2>
+                        <form th:action="@{/admin/listPromotions/editAndSave}" th:object="${promotion}" method="post"
+                              enctype="multipart/form-data">
+                            <input type="hidden" th:field="*{id}">
+                            <div class="form-group">
+                                <label>Tên mã giảm giá</label>
+                                <input th:field="*{name}" type="text" class="form-control"
+                                       name="name" placeholder="Nhập tên mã giảm giá..." id="name" value="" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Ngày bắt đầu</label>
+                                <input th:field="*{startDate}" type="date" class="form-control"
+                                       name="startDate" placeholder="Nhập ngày bắt đầu..." id="startDate" value="">
+                            </div>
+                            <div class="form-group">
+                                <label>Ngày kết thúc</label>
+                                <input th:field="*{endDate}" type="date" class="form-control"
+                                       name="endDate" placeholder="Nhập ngày kết thúc..." id="endDate" value="">
+                            </div>
+                            <div class="form-group">
+                                <label>Ngày áp dụng</label>
+                                <div style="display: flex">
+                                    <div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" th:checked="${Monday}"
+                                                   id="Monday"
+                                                   name="Monday" value="Monday">
+                                            <label class="form-check-label" for="Monday">Thứ 2</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" th:checked="${Tuesday}"
+                                                   id="Tuesday"
+                                                   name="Tuesday" value="Tuesday">
+                                            <label class="form-check-label" for="Monday">Thứ 3</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" th:checked="${Wednesday}"
+                                                   id="Wednesday"
+                                                   name="Wednesday" value="Wednesday">
+                                            <label class="form-check-label" for="Monday">Thứ 4</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" th:checked="${Thursday}"
+                                                   id="Thursday"
+                                                   name="Thursday" value="Thursday">
+                                            <label class="form-check-label" for="Monday">Thứ 5</label>
+                                        </div>
+                                    </div>
+                                    <div style="margin-left: 40px">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" th:checked="${Friday}"
+                                                   id="Friday"
+                                                   name="Friday" value="Friday">
+                                            <label class="form-check-label" for="Monday">Thứ 6</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" th:checked="${Saturday}"
+                                                   id="Saturday"
+                                                   name="Saturday" value="Saturday">
+                                            <label class="form-check-label" for="Monday">Thứ 7</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" th:checked="${Sunday}"
+                                                   id="Sunday"
+                                                   name="Sunday" value="Sunday">
+                                            <label class="form-check-label" for="Monday">Chủ nhật</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" th:checked="${AllWeek}"
+                                                   id="AllWeek"
+                                                   name="AllWeek" value="AllWeek">
+                                            <label class="form-check-label" for="Monday">Áp dụng cả tuần</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Giảm giá (%)</label>
+                                <input th:field="*{discount}" type="text" class="form-control"
+                                       pattern="^[0-9]{1,3}$" title="Must enter from 0 to 100"
+                                       name="discount" placeholder="Nhập % giảm giá..." id="discount" value="" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Giảm tối đa</label>
+                                <input th:field="*{maxdiscount}" type="text" class="form-control"
+                                       name="maxdiscount" placeholder="Nhập số tiền giảm tối đa..." id="maxdiscount" value="" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Số lượng</label>
+                                <input th:field="*{remainapply}" type="text" class="form-control"
+                                       name="remainapply" placeholder="Nhập số lượng..." id="remainapply" value="" required>
+                            </div>
+                            <!--                            <div class="form-group">-->
+                            <!--                                <label>Status</label>-->
+                            <!--                                <input th:field="*{status}" type="text" class="form-control"-->
+                            <!--                                       name="status" placeholder="Enter status" id="status" value="" required>-->
+                            <!--                            </div>-->
+                            <div class="form-group">
+                                <label>Trạng thái</label>
+                                <select th:field="*{status}" class="form-select">
+                                    <option th:value='0' th:text="Disable"></option>
+                                    <option th:value='1' th:text="Enable"></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Mã</label>
+                                <input th:field="*{code}" type="text" class="form-control"
+                                       name="code" placeholder="Nhập mã" id="code" value="" required>
+                            </div>
+                            <span th:text="${alert}" style="color:red"></span>
+                            <br>
+                            <button sec:authorize="hasAnyRole('ADMIN','STAFF')"
+                                    type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                            <a class="btn btn-primary" href="/admin/listPromotions">Quay lại màn mã giảm giá</a>
+                        </form>
+                    </div>
+                </div>
+                <th:block th:replace="layout_admin/footer :: footer"></th:block>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="layout_admin/js_admin :: js_admin"></th:block>
+</body>
+</html>

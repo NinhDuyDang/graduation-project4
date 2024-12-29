@@ -1,0 +1,82 @@
+<!doctype html>
+<html class="no-js" lang=""
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Book Library</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <th:block th:replace="layout_customer/head :: head"></th:block>
+</head>
+<body>
+
+<div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+    <!--************************************
+            Header Start
+    *************************************-->
+    <div th:include="layout_customer/navbar:: navbar"></div>
+    <!--************************************
+            Header End
+    *************************************-->
+    <!--************************************
+            Inner Banner Start
+    *************************************-->
+    <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" th:attr="data-image-src=@{/images/parallax/bgparallax-07.jpg}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="tg-innerbannercontent">
+                        <h1>Về chúng tôi</h1>
+                        <ol class="tg-breadcrumb">
+                            <li><a href="javascript:void(0);">Trang chủ</a></li>
+                            <li class="tg-active">Về chúng tôi</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--************************************
+            Inner Banner End
+    *************************************-->
+    <!--************************************
+            Main Start
+    *************************************-->
+    <main id="tg-main" class="tg-main tg-haslayout">
+        <!--************************************
+                News Grid Start
+        *************************************-->
+        <div class="tg-sectionspace tg-haslayout">
+            <div class="container">
+                <div class="row">
+                    <p>Nội dung đang cập nhật</p>
+                    <h1>Book library là sản pẩm được phát triển bởi công ty sách...</h1>
+                </div>
+            </div>
+        </div>
+        <!--************************************
+                News Grid End
+        *************************************-->
+    </main>
+    <!--************************************
+            Main End
+    *************************************-->
+    <!--************************************
+            Footer Start
+    *************************************-->
+    <th:block th:replace="layout_customer/footer :: footer_customer"></th:block>
+    <!--************************************
+            Footer End
+    *************************************-->
+</div>
+<!--************************************
+        Wrapper End
+*************************************-->
+<th:block th:replace="layout_customer/js :: js"></th:block>
+</body>
+
+</html>

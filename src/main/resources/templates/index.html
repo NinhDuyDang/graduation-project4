@@ -1,0 +1,444 @@
+<!doctype html>
+<html class="no-js" lang=""
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Book Library</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <th:block th:replace="layout_customer/head :: head"></th:block>
+    <style>
+        .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+            background-color: #77b748;
+            color: #FFFFFF;
+            cursor: default;
+            margin-right: 0;
+            margin-left: 0;
+        }
+
+        .nav-tabs>li>a {
+            border-radius: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+    <!--************************************
+            Header Start
+    *************************************-->
+    <div th:include="layout_customer/navbar:: navbar"></div>
+    <!--************************************
+            Header End
+    *************************************-->
+    <!--************************************
+            Inner Banner Start
+    *************************************-->
+    <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100"
+         data-appear-top-offset="600" data-parallax="scroll"
+         th:attr="data-image-src=@{/images/parallax/bgparallax-07.jpg}">
+        <div class="container-fluid">
+            <section id="slider"><!--slider-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+                                    <li data-target="#slider-carousel" data-slide-to="1"></li>
+                                    <li data-target="#slider-carousel" data-slide-to="2"></li>
+                                </ol>
+
+                                <div class="carousel-inner">
+                                    <div class="item active">
+                                        <div class="col-sm-6">
+                                            <h1><span>SÁCH</span></h1>
+                                            <h2>Dành cho mọi người đọc</h2>
+                                            <p>Khám phá thế giới kiến thức, câu chuyện và nguồn cảm hứng cho mọi lứa tuổi và sở thích.</p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <img style="height: 210px" th:src="@{https://cdn0.fahasa.com/media/catalog/product/8/9/8935072950972.jpg}" class="girl img-responsive" alt=""/>
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="col-sm-6">
+                                            <h1><span>SÁCH</span></h1>
+                                            <h2>Mở khóa kiến thức</h2>
+                                            <p>Khám phá những câu chuyện, hiểu biết sâu sắc và trí tuệ thông qua bộ sưu tập sách khổng lồ.</p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <img style="height: 210px" th:src="@{https://cdn0.fahasa.com/media/catalog/product/t/u/tu-sach-van-hoc-trong-nha-truong_lang-le-sa-pa_bia.jpg}" class="girl img-responsive" alt=""/>
+                                        </div>
+                                    </div>
+
+                                    <div class="item">
+                                        <div class="col-sm-6">
+                                            <h1><span>SÁCH</span></h1>
+                                            <h2>Khơi dậy trí tưởng tượng của bạn</h2>
+                                            <p>Khám phá thế giới mới, tìm hiểu và tìm cảm hứng qua từng trang.</p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <img style="height: 210px" th:src="@{https://cdn0.fahasa.com/media/catalog/product/i/m/image_195509_1_8555.jpg}" class="girl img-responsive" alt=""/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a style="position: absolute;
+                                top: 50%;
+                                font-size: 60px;
+                                color: #C2C2C1;
+                                left: 0;" href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+                                    <i class="fa fa-angle-left"></i>
+                                </a>
+                                <a style="position: absolute;
+                                top: 50%;
+                                font-size: 60px;
+                                color: #C2C2C1;
+                                right: 0;" href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section><!--/slider-->
+        </div>
+    </div>
+    <!--************************************
+            Inner Banner End
+    *************************************-->
+    <!--************************************
+            Main Start
+    *************************************-->
+    <section class="tg-sectionspace tg-haslayout">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="tg-sectionhead">
+                        <h2><span>Sự lựa chọn của mọi người</span>Sách bán chạy nhất</h2>
+                        <a class="tg-btn" th:href="@{/product/listproducts}">Xem tất cả</a>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="tg-bestsellingbooksslider" class="tg-bestsellingbooksslider tg-bestsellingbooks owl-carousel">
+                        <div class="item" th:each="product : ${listproduct}">
+                            <div class="tg-postbook">
+                                <figure class="tg-featureimg">
+                                    <div class="tg-bookimg">
+                                        <div class="tg-frontcover"><img th:src="${product.getImage()}" alt="image description"></div>
+                                        <div class="tg-backcover"><img th:src="${product.getImage()}" alt="image description"></div>
+                                    </div>
+                                    <a class="tg-btnaddtowishlist" sec:authorize="!isAuthenticated()"
+                                       th:href="@{'/cart/addtoCart/'+${product.id}}">
+                                        <i class="fa fa-shopping-basket"></i>
+                                        <span>Thêm vào giỏ</span>
+                                    </a>
+                                    <a class="tg-btnaddtowishlist" sec:authorize="hasRole('CUSTOMER')"
+                                       th:href="@{'/cart/addtoCart/'+${product.id}}">
+                                        <i class="fa fa-shopping-basket"></i>
+                                        <span>Thêm vào giỏ</span>
+                                    </a>
+                                </figure>
+                                <div class="tg-postbookcontent">
+                                    <ul class="tg-bookscategories">
+                                        <li><a th:href="@{'/product/listproducts/1?categoryId='+${product.getCategory().getId()}+'&sortField='
+                                +${sortField}+'&sortDir='+ ${sortDir}+'&keyword= '}"><p
+                                                th:text="${product.getCategory().getName()}"></p></a></li>
+                                    </ul>
+                                    <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
+                                    <div class="tg-booktitle">
+                                        <h3><a th:href="@{'/product/productdetail/'+${product.id}}"><h3 style="overflow: hidden;
+                                                                white-space: nowrap;
+                                                                text-overflow: ellipsis;
+                                                                width: 200px;" th:text="${product.name}"></h3></a></h3>
+                                    </div>
+                                    <span style="overflow: hidden;
+                                                                white-space: nowrap;
+                                                                text-overflow: ellipsis;
+                                                                width: 200px;"  class="tg-bookwriter">Tác giả: <a th:text="${product.getAuthor()}"></a></span>
+                                    <span class="tg-stars"><span></span></span>
+                                    <span class="tg-bookprice">
+												<ins class="price" th:text="${product.price.longValue()} + ' VND'"
+                                                     th:attr="data-price=${product.price.longValue()}"></ins>
+											</span>
+                                    <a class="tg-btn tg-btnstyletwo"
+                                       sec:authorize="hasRole('CUSTOMER')"
+                                       th:href="@{'/cart/addtoCart/'+${product.id}}">
+                                        <i class="fa fa-shopping-basket"></i>
+                                        <em>Thêm vào giỏ</em>
+                                    </a>
+                                    <a class="tg-btn tg-btnstyletwo" sec:authorize="!isAuthenticated()"
+                                       th:href="@{'/cart/addtoCart/'+${product.id}}">
+                                        <i class="fa fa-shopping-basket"></i>
+                                        <em>Thêm vào giỏ</em>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="tg-parallax tg-bgtestimonials tg-haslayout" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/parallax/bgparallax-05.jpg">
+        <div class="tg-sectionspace tg-haslayout">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-push-2">
+                        <div id="tg-testimonialsslider" class="tg-testimonialsslider tg-testimonials owl-carousel">
+                            <div class="item tg-testimonial">
+                                <figure><img src="images/author/imag-02.jpg" alt="image description"></figure>
+                                <blockquote><q>Mỗi trang sách là một hành trình, mỗi dòng chữ là một bước tiến đến sự hiểu biết sâu sắc và lòng khát khao vô tận.</q></blockquote>
+                                <div class="tg-testimonialauthor">
+                                    <h3>Holli Fenstermacher</h3>
+                                    <span>Manager @ CIFP</span>
+                                </div>
+                            </div>
+                            <div class="item tg-testimonial">
+                                <figure><img src="images/author/imag-02.jpg" alt="image description"></figure>
+                                <blockquote><q>Đọc sách không chỉ mở ra cánh cửa tri thức mà còn dẫn lối tâm hồn đến những vùng đất mới lạ và đầy cảm hứng.</q></blockquote>
+                                <div class="tg-testimonialauthor">
+                                    <h3>Holli Fenstermacher</h3>
+                                    <span>Manager @ CIFP</span>
+                                </div>
+                            </div>
+                            <div class="item tg-testimonial">
+                                <figure><img src="images/author/imag-02.jpg" alt="image description"></figure>
+                                <blockquote><q>Một cuốn sách hay là một người bạn khôn ngoan..</q></blockquote>
+                                <div class="tg-testimonialauthor">
+                                    <h3>Lev Tolstoy</h3>
+                                    <span>Manager @ CIFP</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <main id="tg-main" class="tg-main tg-haslayout">
+        <!--************************************
+                News Grid Start
+        *************************************-->
+        <div class="tg-sectionspace tg-haslayout">
+            <div class="container">
+                <div class="category-tab col-sm-12"><!--category-tab-->
+                    <div class="col-sm-12">
+                        <ul class="nav nav-tabs" style="background: #40403E;
+                        border-bottom: 1px solid #FE980F;
+                        list-style: none outside none;
+                        margin: 0 0 30px;
+                        padding: 0;
+                        width: 100%;">
+                            <li class="active"><a href="#tshirt" data-toggle="tab" th:text="${listCategories.get(0).name}"></a></li>
+                            <li><a href="#blazers" data-toggle="tab" th:text="${listCategories.get(1).name}"></a></li>
+                            <li><a href="#sunglass" data-toggle="tab" th:text="${listCategories.get(2).name}"></a></li>
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="tshirt">
+                            <div th:each="product : ${listProductsbyCategory1}">
+                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
+                                    <div class="tg-postbook">
+                                        <figure class="tg-featureimg">
+                                            <div class="tg-bookimg">
+                                                <div class="tg-frontcover"><img th:src="${product.getImage()}" alt="image description"></div>
+                                                <div class="tg-backcover"><img th:src="${product.getImage()}" alt="image description"></div>
+                                            </div>
+                                            <a class="tg-btnaddtowishlist" sec:authorize="!isAuthenticated()"
+                                               th:href="@{'/cart/addtoCart/'+${product.id}}">
+                                                <i class="fa fa-shopping-basket"></i>
+                                                <span>Thêm vào giỏ</span>
+                                            </a>
+                                        </figure>
+                                        <div class="tg-postbookcontent">
+                                            <ul class="tg-bookscategories">
+                                                <li><a th:href="@{'/product/listproducts/1?categoryId='+${product.getCategory().getId()}+'&sortField='
+                                +${sortField}+'&sortDir='+ ${sortDir}+'&keyword= '}"><p
+                                                        th:text="${product.getCategory().getName()}"></p>
+                                                </a></li>
+                                            </ul>
+                                            <div class="tg-themetagbox"><span
+                                                    class="tg-themetag">sale</span></div>
+                                            <div class="tg-booktitle">
+                                                <a th:href="@{'/product/productdetail/'+${product.id}}">
+                                                    <h3 style="overflow: hidden;
+                                                                white-space: nowrap;
+                                                                text-overflow: ellipsis;
+                                                                width: 200px;" th:text="${product.name}"></h3>
+                                                </a>
+                                            </div>
+                                            <span style="overflow: hidden;
+                                                                white-space: nowrap;
+                                                                text-overflow: ellipsis;
+                                                                width: 200px;"  class="tg-bookwriter">Tác giả: <a th:text="${product.getAuthor()}"></a></span>
+                                            <span class="tg-stars"><span></span></span>
+                                            <span class="tg-bookprice">
+															<ins class="price" th:text="${product.price.longValue()} + ' VND'"
+                                                                 th:attr="data-price=${product.price.longValue()}"></ins>
+														</span>
+                                            <a class="tg-btn tg-btnstyletwo"
+                                               sec:authorize="hasRole('CUSTOMER')"
+                                               th:href="@{'/cart/addtoCart/'+${product.id}}">
+                                                <i class="fa fa-shopping-basket"></i>
+                                                <em>Thêm vào giỏ</em>
+                                            </a>
+                                            <a class="tg-btn tg-btnstyletwo"
+                                               sec:authorize="!isAuthenticated()"
+                                               th:href="@{'/cart/addtoCart/'+${product.id}}">
+                                                <i class="fa fa-shopping-basket"></i>
+                                                <em>Thêm vào giỏ</em>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="blazers" >
+                            <div th:each="product : ${listProductsbyCategory2}">
+                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
+                                    <div class="tg-postbook">
+                                        <figure class="tg-featureimg">
+                                            <div class="tg-bookimg">
+                                                <div class="tg-frontcover"><img th:src="${product.getImage()}" alt="image description"></div>
+                                                <div class="tg-backcover"><img th:src="${product.getImage()}" alt="image description"></div>
+                                            </div>
+                                            <a class="tg-btnaddtowishlist" sec:authorize="!isAuthenticated()"
+                                               th:href="@{'/cart/addtoCart/'+${product.id}}">
+                                                <i class="fa fa-shopping-basket"></i>
+                                                <span>Thêm vào giỏ</span>
+                                            </a>
+                                        </figure>
+                                        <div class="tg-postbookcontent">
+                                            <ul class="tg-bookscategories">
+                                                <li><a th:href="@{'/product/listproducts/1?categoryId='+${product.getCategory().getId()}+'&sortField='
+                                +${sortField}+'&sortDir='+ ${sortDir}+'&keyword= '}"><p
+                                                        th:text="${product.getCategory().getName()}"></p>
+                                                </a></li>
+                                            </ul>
+                                            <div class="tg-themetagbox"><span
+                                                    class="tg-themetag">sale</span></div>
+                                            <div class="tg-booktitle">
+                                                <a th:href="@{'/product/productdetail/'+${product.id}}">
+                                                    <h3 style="overflow: hidden;
+                                                                white-space: nowrap;
+                                                                text-overflow: ellipsis;
+                                                                width: 200px;" th:text="${product.name}"></h3>
+                                                </a>
+                                            </div>
+                                            <span style="overflow: hidden;
+                                                                white-space: nowrap;
+                                                                text-overflow: ellipsis;
+                                                                width: 200px;"  class="tg-bookwriter">Tác giả: <a th:text="${product.getAuthor()}"></a></span>
+                                            <span class="tg-stars"><span></span></span>
+                                            <span class="tg-bookprice">
+															<ins class="price" th:text="${product.price.longValue()} + ' VND'"
+                                                                 th:attr="data-price=${product.price.longValue()}"></ins>
+														</span>
+                                            <a class="tg-btn tg-btnstyletwo"
+                                               sec:authorize="hasRole('CUSTOMER')"
+                                               th:href="@{'/cart/addtoCart/'+${product.id}}">
+                                                <i class="fa fa-shopping-basket"></i>
+                                                <em>Thêm vào giỏ</em>
+                                            </a>
+                                            <a class="tg-btn tg-btnstyletwo"
+                                               sec:authorize="!isAuthenticated()"
+                                               th:href="@{'/cart/addtoCart/'+${product.id}}">
+                                                <i class="fa fa-shopping-basket"></i>
+                                                <em>Thêm vào giỏ</em>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="sunglass" >
+                            <div th:each="product : ${listProductsbyCategory3}">
+                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
+                                    <div class="tg-postbook">
+                                        <figure class="tg-featureimg">
+                                            <div class="tg-bookimg">
+                                                <div class="tg-frontcover"><img th:src="${product.getImage()}" alt="image description"></div>
+                                                <div class="tg-backcover"><img th:src="${product.getImage()}" alt="image description"></div>
+                                            </div>
+                                            <a class="tg-btnaddtowishlist" sec:authorize="!isAuthenticated()"
+                                               th:href="@{'/cart/addtoCart/'+${product.id}}">
+                                                <i class="fa fa-shopping-basket"></i>
+                                                <span>Thêm vào giỏ</span>
+                                            </a>
+                                        </figure>
+                                        <div class="tg-postbookcontent">
+                                            <ul class="tg-bookscategories">
+                                                <li><a th:href="@{'/product/listproducts/1?categoryId='+${product.getCategory().getId()}+'&sortField='
+                                +${sortField}+'&sortDir='+ ${sortDir}+'&keyword= '}"><p
+                                                        th:text="${product.getCategory().getName()}"></p>
+                                                </a></li>
+                                            </ul>
+                                            <div class="tg-themetagbox"><span
+                                                    class="tg-themetag">sale</span></div>
+                                            <div class="tg-booktitle">
+                                                <a th:href="@{'/product/productdetail/'+${product.id}}">
+                                                    <h3 style="overflow: hidden;
+                                                                white-space: nowrap;
+                                                                text-overflow: ellipsis;
+                                                                width: 200px;" th:text="${product.name}"></h3>
+                                                </a>
+                                            </div>
+                                            <span style="overflow: hidden;
+                                                                white-space: nowrap;
+                                                                text-overflow: ellipsis;
+                                                                width: 200px;"  class="tg-bookwriter">Tác giả: <a th:text="${product.getAuthor()}"></a></span>
+                                            <span class="tg-stars"><span></span></span>
+                                            <span class="tg-bookprice">
+															<ins class="price" th:text="${product.price.longValue()} + ' VND'"
+                                                                 th:attr="data-price=${product.price.longValue()}"></ins>
+														</span>
+                                            <a class="tg-btn tg-btnstyletwo"
+                                               sec:authorize="hasRole('CUSTOMER')"
+                                               th:href="@{'/cart/addtoCart/'+${product.id}}">
+                                                <i class="fa fa-shopping-basket"></i>
+                                                <em>Thêm vào giỏ</em>
+                                            </a>
+                                            <a class="tg-btn tg-btnstyletwo"
+                                               sec:authorize="!isAuthenticated()"
+                                               th:href="@{'/cart/addtoCart/'+${product.id}}">
+                                                <i class="fa fa-shopping-basket"></i>
+                                                <em>Thêm vào giỏ</em>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--/category-tab-->
+            </div>
+        </div>
+        <!--************************************
+                News Grid End
+        *************************************-->
+    </main>
+    <!--************************************
+            Main End
+    *************************************-->
+    <!--************************************
+            Footer Start
+    *************************************-->
+    <th:block th:replace="layout_customer/footer :: footer_customer"></th:block>
+    <!--************************************
+            Footer End
+    *************************************-->
+</div>
+<!--************************************
+        Wrapper End
+*************************************-->
+<th:block th:replace="layout_customer/js :: js"></th:block>
+</body>
+
+</html>

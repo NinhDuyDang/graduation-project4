@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:fragment="navbar_admin">
+    <header class="header header-sticky p-0 mb-4" style="display: block;">
+        <nav class="navbar navbar-expand-md">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#"></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled"></a>
+                        </li>
+                    </ul>
+                    <a class="navbar-brand" style="margin-right: 2px">Xin chào,</a>
+                    <a class="navbar-brand" sec:authentication="name"></a>
+                    <div class="notification-icon" onclick="toggleNotifications()">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-count" th:text="${notifyCount}"></span>
+                    </div>
+                    <div class="notification-list hidden">
+                        <ul th:each="noti : ${notify}">
+                            <li th:class="${noti.status == 0} ? 'dimmed' : ''">
+                                <a th:href="@{'/admin/orderDetail/' + ${noti.order.id} + '?source=notification'}">
+                                    <p th:text="${noti.order.receiverName + ' đã đặt đơn hàng trị giá ' + noti.order.formattedPrice + ' VND'}"></p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <a th:href="@{/}"><button class="btn btn-warning" style="margin-right: 3px;: ">Cửa hàng</button></a>
+                    <a th:href="@{/logout}"><button class="btn btn-danger">Đăng xuất</button></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+</th:block>
+<script>
+    const header = document.querySelector('header.header');
+
+    document.addEventListener('scroll', () => {
+        if (header) {
+            header.classList.toggle('shadow-sm', document.documentElement.scrollTop > 0);
+        }
+    });
+</script>
+</body>
+</html>

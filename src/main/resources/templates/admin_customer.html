@@ -1,0 +1,365 @@
+<!DOCTYPE html><!--
+* CoreUI PRO Bootstrap Admin Template
+* @version v5.2.0
+* @link https://coreui.io/product/bootstrap-dashboard-template/
+* Copyright (c) 2023 creativeLabs Łukasz Holeczek
+* License (https://coreui.io/pro/license/)
+-->
+<html lang="en">
+<head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="CoreUI - Bootstrap Admin Template">
+    <meta name="author" content="Łukasz Holeczek">
+    <meta name="keyword" content="Bootstrap,Admin,Template,SCSS,HTML,RWD,Dashboard">
+    <title>CoreUI Bootstrap Admin Template</title>
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="assets/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <th:block th:replace="layout_admin/head_admin :: head_admin"></th:block>
+</head>
+<body>
+<th:block th:replace="layout_admin/sidebar_admin :: sidebar_admin"></th:block>
+<div class="sidebar sidebar-light sidebar-lg sidebar-end sidebar-overlaid border-start" id="aside">
+    <div class="sidebar-header p-0 position-relative">
+        <ul class="nav nav-underline-border w-100" role="tablist">
+            <li class="nav-item"><a class="nav-link active" data-coreui-toggle="tab" href="#timeline" role="tab">
+                <svg class="icon">
+                    <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-list"></use>
+                </svg></a></li>
+            <li class="nav-item"><a class="nav-link" data-coreui-toggle="tab" href="#messages" role="tab">
+                <svg class="icon">
+                    <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-speech"></use>
+                </svg></a></li>
+            <li class="nav-item"><a class="nav-link" data-coreui-toggle="tab" href="#settings" role="tab">
+                <svg class="icon">
+                    <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-settings"></use>
+                </svg></a></li>
+        </ul>
+        <button class="btn-close position-absolute top-50 end-0 translate-middle my-0" type="button" aria-label="Close" onclick="coreui.Sidebar.getInstance(document.querySelector(&quot;#aside&quot;)).toggle()"></button>
+    </div>
+    <!-- Tab panes-->
+    <div class="tab-content">
+        <div class="tab-pane active" id="timeline" role="tabpanel">
+            <div class="list-group list-group-flush">
+                <div class="list-group-item border-start-4 border-start-secondary bg-body-tertiary text-center fw-bold text-body-secondary text-uppercase small" data-coreui-i18n="today">Today</div>
+                <div class="list-group-item border-start-4 border-start-warning list-group-item-divider">
+                    <div class="avatar avatar-lg float-end"><img class="avatar-img" src="assets/img/avatars/7.jpg" alt="user@email.com"></div>
+                    <div>Meeting with <strong>Lucas</strong></div><small class="text-body-secondary me-3">
+                    <svg class="icon">
+                        <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-calendar"></use>
+                    </svg> 1 - 3pm</small><small class="text-body-secondary">
+                    <svg class="icon">
+                        <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-location-pin"></use>
+                    </svg> Palo Alto, CA</small>
+                </div>
+                <div class="list-group-item border-start-4 border-start-info">
+                    <div class="avatar avatar-lg float-end"><img class="avatar-img" src="assets/img/avatars/4.jpg" alt="user@email.com"></div>
+                    <div>Skype with <strong>Megan</strong></div><small class="text-body-secondary me-3">
+                    <svg class="icon">
+                        <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-calendar"></use>
+                    </svg> 4 - 5pm</small><small class="text-body-secondary">
+                    <svg class="icon">
+                        <use xlink:href="vendors/@coreui/icons/svg/brand.svg#cib-skype"></use>
+                    </svg> On-line</small>
+                </div>
+                <div class="list-group-item border-start-4 border-start-secondary bg-body-tertiary text-center fw-bold text-body-secondary text-uppercase small" data-coreui-i18n="tomorrow">Tomorrow</div>
+                <div class="list-group-item border-start-4 border-start-danger list-group-item-divider">
+                    <div>New UI Project - <strong>deadline</strong></div><small class="text-body-secondary me-3">
+                    <svg class="icon">
+                        <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-calendar"></use>
+                    </svg> 10 - 11pm</small><small class="text-body-secondary">
+                    <svg class="icon">
+                        <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-home"></use>
+                    </svg> creativeLabs HQ</small>
+                    <div class="avatars-stack mt-2">
+                        <div class="avatar avatar-xs"><img class="avatar-img" src="assets/img/avatars/2.jpg" alt="user@email.com"></div>
+                        <div class="avatar avatar-xs"><img class="avatar-img" src="assets/img/avatars/3.jpg" alt="user@email.com"></div>
+                        <div class="avatar avatar-xs"><img class="avatar-img" src="assets/img/avatars/4.jpg" alt="user@email.com"></div>
+                        <div class="avatar avatar-xs"><img class="avatar-img" src="assets/img/avatars/5.jpg" alt="user@email.com"></div>
+                        <div class="avatar avatar-xs"><img class="avatar-img" src="assets/img/avatars/6.jpg" alt="user@email.com"></div>
+                    </div>
+                </div>
+                <div class="list-group-item border-start-4 border-start-success list-group-item-divider">
+                    <div><strong>#10 Startups.Garden</strong> Meetup</div><small class="text-body-secondary me-3">
+                    <svg class="icon">
+                        <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-calendar"></use>
+                    </svg> 1 - 3pm</small><small class="text-body-secondary">
+                    <svg class="icon">
+                        <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-location-pin"></use>
+                    </svg> Palo Alto, CA</small>
+                </div>
+                <div class="list-group-item border-start-4 border-start-primary list-group-item-divider">
+                    <div><strong>Team meeting</strong></div><small class="text-body-secondary me-3">
+                    <svg class="icon">
+                        <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-calendar"></use>
+                    </svg> 4 - 6pm</small><small class="text-body-secondary">
+                    <svg class="icon">
+                        <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-home"></use>
+                    </svg> creativeLabs HQ</small>
+                    <div class="avatars-stack mt-2">
+                        <div class="avatar avatar-xs"><img class="avatar-img" src="assets/img/avatars/2.jpg" alt="user@email.com"></div>
+                        <div class="avatar avatar-xs"><img class="avatar-img" src="assets/img/avatars/3.jpg" alt="user@email.com"></div>
+                        <div class="avatar avatar-xs"><img class="avatar-img" src="assets/img/avatars/4.jpg" alt="user@email.com"></div>
+                        <div class="avatar avatar-xs"><img class="avatar-img" src="assets/img/avatars/5.jpg" alt="user@email.com"></div>
+                        <div class="avatar avatar-xs"><img class="avatar-img" src="assets/img/avatars/6.jpg" alt="user@email.com"></div>
+                        <div class="avatar avatar-xs"><img class="avatar-img" src="assets/img/avatars/7.jpg" alt="user@email.com"></div>
+                        <div class="avatar avatar-xs"><img class="avatar-img" src="assets/img/avatars/8.jpg" alt="user@email.com"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane p-3" id="messages" role="tabpanel">
+            <div class="message">
+                <div class="py-3 pb-5 me-3 float-start">
+                    <div class="avatar"><img class="avatar-img" src="assets/img/avatars/7.jpg" alt="user@email.com"><span class="avatar-status bg-success"></span></div>
+                </div>
+                <div><small class="text-body-secondary">Lukasz Holeczek</small><small class="text-body-secondary float-end mt-1">1:52 PM</small></div>
+                <div class="text-truncate fw-bold">Lorem ipsum dolor sit amet</div><small class="text-body-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
+            </div>
+            <hr>
+            <div class="message">
+                <div class="py-3 pb-5 me-3 float-start">
+                    <div class="avatar"><img class="avatar-img" src="assets/img/avatars/7.jpg" alt="user@email.com"><span class="avatar-status bg-success"></span></div>
+                </div>
+                <div><small class="text-body-secondary">Lukasz Holeczek</small><small class="text-body-secondary float-end mt-1">1:52 PM</small></div>
+                <div class="text-truncate fw-bold">Lorem ipsum dolor sit amet</div><small class="text-body-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
+            </div>
+            <hr>
+            <div class="message">
+                <div class="py-3 pb-5 me-3 float-start">
+                    <div class="avatar"><img class="avatar-img" src="assets/img/avatars/7.jpg" alt="user@email.com"><span class="avatar-status bg-success"></span></div>
+                </div>
+                <div><small class="text-body-secondary">Lukasz Holeczek</small><small class="text-body-secondary float-end mt-1">1:52 PM</small></div>
+                <div class="text-truncate fw-bold">Lorem ipsum dolor sit amet</div><small class="text-body-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
+            </div>
+            <hr>
+            <div class="message">
+                <div class="py-3 pb-5 me-3 float-start">
+                    <div class="avatar"><img class="avatar-img" src="assets/img/avatars/7.jpg" alt="user@email.com"><span class="avatar-status bg-success"></span></div>
+                </div>
+                <div><small class="text-body-secondary">Lukasz Holeczek</small><small class="text-body-secondary float-end mt-1">1:52 PM</small></div>
+                <div class="text-truncate fw-bold">Lorem ipsum dolor sit amet</div><small class="text-body-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
+            </div>
+            <hr>
+            <div class="message">
+                <div class="py-3 pb-5 me-3 float-start">
+                    <div class="avatar"><img class="avatar-img" src="assets/img/avatars/7.jpg" alt="user@email.com"><span class="avatar-status bg-success"></span></div>
+                </div>
+                <div><small class="text-body-secondary">Lukasz Holeczek</small><small class="text-body-secondary float-end mt-1">1:52 PM</small></div>
+                <div class="text-truncate fw-bold">Lorem ipsum dolor sit amet</div><small class="text-body-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
+            </div>
+        </div>
+        <div class="tab-pane p-3" id="settings" role="tabpanel">
+            <h6 data-coreui-i18n="settings">Settings</h6>
+            <div class="aside-options">
+                <div class="clearfix mt-4">
+                    <div class="form-check form-switch form-switch-lg">
+                        <input class="form-check-input me-0" id="flexSwitchCheckDefaultLg" type="checkbox" checked="">
+                        <label class="form-check-label fw-semibold small" for="flexSwitchCheckDefaultLg">Option 1</label>
+                    </div>
+                </div>
+                <div><small class="text-body-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small></div>
+            </div>
+            <div class="aside-options">
+                <div class="clearfix mt-3">
+                    <div class="form-check form-switch form-switch-lg">
+                        <input class="form-check-input me-0" id="flexSwitchCheckDefaultLg" type="checkbox">
+                        <label class="form-check-label fw-semibold small" for="flexSwitchCheckDefaultLg">Option 2</label>
+                    </div>
+                </div>
+                <div><small class="text-body-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small></div>
+            </div>
+            <div class="aside-options">
+                <div class="clearfix mt-3">
+                    <div class="form-check form-switch form-switch-lg">
+                        <input class="form-check-input me-0" id="flexSwitchCheckDefaultLg" type="checkbox">
+                        <label class="form-check-label fw-semibold small" for="flexSwitchCheckDefaultLg">Option 3</label>
+                    </div>
+                </div>
+            </div>
+            <div class="aside-options">
+                <div class="clearfix mt-3">
+                    <div class="form-check form-switch form-switch-lg">
+                        <input class="form-check-input me-0" id="flexSwitchCheckDefaultLg" type="checkbox" checked="">
+                        <label class="form-check-label fw-semibold small" for="flexSwitchCheckDefaultLg">Option 4</label>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <h6 data-coreui-i18n="systemUtilization">System Utilization</h6>
+            <div class="small text-uppercase fw-semibold mb-1 mt-4" data-coreui-i18n="cpuUsage">CPU Usage</div>
+            <div class="progress progress-thin">
+                <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div class="small text-body-secondary" data-coreui-i18n="cpuUsageDescription, { 'number_of_processes': 358, 'number_of_cores': '1/4' }">348 Processes. 1/4 Cores.</div>
+            <div class="small text-uppercase fw-semibold mb-1 mt-2" data-coreui-i18n="memoryUsage">Memory Usage</div>
+            <div class="progress progress-thin">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div class="small text-body-secondary">11444GB/16384MB</div>
+            <div class="small text-uppercase fw-semibold mb-1 mt-2" data-coreui-i18n="ssdUsage">SSD Usage</div>
+            <div class="progress progress-thin">
+                <div class="progress-bar bg-danger" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div class="small text-body-secondary">243GB/256GB</div>
+            <div class="small text-uppercase fw-semibold mb-1 mt-2" data-coreui-i18n="ssdUsage">SSD Usage</div>
+            <div class="progress progress-thin">
+                <div class="progress-bar bg-success" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div class="small text-body-secondary">25GB/256GB</div>
+        </div>
+    </div>
+</div>
+<div class="wrapper d-flex flex-column min-vh-100">
+    <th:block th:replace="layout_admin/navbar_admin :: navbar_admin"></th:block>
+    <div class="body flex-grow-1">
+        <div class="container-lg px-4" style="max-width: 1500px;">
+            <div class="fs-2 fw-semibold">Khách hàng</div>
+            <div style="display: flex; justify-content: space-between">
+                <div>
+                    <p>
+                        <a class="btn btn-primary" href="/admin/customer/new">Thêm khách hàng</a>
+                    </p>
+                </div>
+                <form th:action="@{'/admin/customer'}" class="d-none d-sm-flex" role="search" style="max-height: 45px;">
+                    <div class="input-group"><span class="input-group-text bg-body-secondary border-0 px-1" id="search-addon">
+                <svg class="icon icon-lg my-1 mx-2 text-body-secondary">
+                  <use th:xlink:href="@{/vendors/@coreui/icons/svg/free.svg} + '#cil-search'"></use>
+                </svg></span>
+                        <input class="form-control bg-body-secondary border-0" type="text" name="keyword" id="keyword" placeholder="Tìm kiếm..." aria-label="Search" aria-describedby="search-addon" data-coreui-i18n="[placeholder]search" th:value="${keyword}">
+                    </div>
+                </form>
+            </div>
+            <div class="card mb-4">
+                <div class="card-header"> Danh sách khách hàng</div>
+                <div class="card-body">
+                    <div class="example">
+                        <div class="tab-content rounded-bottom">
+                            <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1000">
+                                <table class="table table-striped border datatable">
+                                    <thead>
+                                    <tr>
+                                        <th>Tên</th>
+                                        <th>Email</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Tên đăng nhập</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="align-middle" th:each="customer : ${listcustomer}">
+                                        <td th:text="${customer.name}"></td>
+                                        <td th:text="${customer.email}"></td>
+                                        <td th:text="${customer.phone}"></td>
+                                        <td th:text="${customer.user.username}"></td>
+                                        <td><a class="btn btn-info me-2" href="#" th:href="@{'/admin/customer/edit/' + ${customer.user.id} }">
+                                            <svg class="icon">
+                                                <use th:xlink:href="@{/vendors/@coreui/icons/svg/free.svg} + '#cil-description'"></use>
+                                            </svg></a><a class="btn btn-danger" th:if="${customer.status==1}" th:href="@{'/admin/customer/disable/' + ${customer.user.id} }">
+                                            <svg class="icon">
+                                                <use th:xlink:href="@{/vendors/@coreui/icons/svg/free.svg} + '#cil-trash'"></use>
+                                            </svg></a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <div class="text-center">
+                    <span>Tổng số lượng khách hàng: [[${totalItems}]] - Trang: [[${currentPage}]] trên [[${totalPages}]] </span>
+                </div>
+                <nav class="pagination justify-content-center flex-wrap">
+                    <th:block th:if="${totalItems > 0 && totalPages>1}">
+                        <li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
+                            <a th:href="@{'/admin/customer/1'+ ${query}}"
+
+                               class="page-link">Đầu</a>
+                        </li>
+                        <li th:if="${currentPage>1}"
+                            th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
+                            <a th:href="@{'/admin/customer/'+${currentPage - 1}+ ${query}}"
+                               class="page-link">Trước</a>
+                        </li>
+                        <th:block th:if="${totalPages <= 10}">
+                            <li th:each="i:${#numbers.sequence(1,totalPages)}" class="page-item">
+                                <a th:href="@{'/admin/customer/'+${i}+ ${query}}"
+                                   class="page-link"> [[${i}]]</a>
+                            </li>
+                        </th:block>
+                        <th:block th:if="${totalPages > 10}">
+                            <th:block th:if="${currentPage <= 3 ||currentPage > totalPages -3}">
+                                <li th:each="i:${#numbers.sequence(1,3)}" class="page-item">
+                                    <a th:href="@{'/admin/customer/'+${i}+ ${query}}"
+                                       class="page-link"> [[${i}]]</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{'/admin/customer/4' + ${query}}"
+                                       class="page-link">...</a>
+                                </li>
+                                <li th:each="i:${#numbers.sequence(totalPages - 2,totalPages)}" class="page-item">
+                                    <a th:href="@{'/admin/customer/'+${i}+ ${query}}"
+                                       class="page-link"> [[${i}]]</a>
+                                </li>
+                            </th:block>
+                            <th:block th:if="${currentPage > 3 && currentPage <= totalPages -3}">
+                                <li>
+                                    <a th:href="@{'/admin/customer/'+${currentPage - 3}+ ${query}}"
+                                       class="page-link">...</a>
+                                </li>
+                                <li th:each="i:${#numbers.sequence(currentPage - 2,currentPage + 2)}"
+                                    class="page-item">
+                                    <a th:href="@{'/admin/customer/'+${i}+ ${query}}"
+                                       class="page-link"> [[${i}]]</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{'/admin/customer/'+${currentPage + 3}+ ${query}}"
+                                       class="page-link">...</a>
+                                </li>
+                            </th:block>
+                        </th:block>
+                        <li th:if="${currentPage<totalPages}"
+                            th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
+                            <a th:href="@{'/admin/customer/'+${currentPage + 1}+ ${query}}"
+                               class="page-link">Sau</a>
+                        </li>
+                        <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
+                            <a th:href="@{'/admin/customer/'+${totalPages}+ ${query}}"
+                               class="page-link">Cuối</a>
+                        </li>
+                    </th:block>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <footer class="footer px-4">
+        <div><a href="https://coreui.io">CoreUI </a><a href="https://coreui.io/product/bootstrap-dashboard-template/">Bootstrap Admin Template</a> © 2023 creativeLabs.</div>
+        <div class="ms-auto">Powered by&nbsp;<a href="https://coreui.io/docs/">CoreUI PRO UI Components</a></div>
+    </footer>
+</div>
+<!-- CoreUI and necessary plugins-->
+<th:block th:replace="layout_admin/js_admin :: js_admin"></th:block>
+<script>
+    const header = document.querySelector('header.header');
+
+    document.addEventListener('scroll', () => {
+        if (header) {
+            header.classList.toggle('shadow-sm', document.documentElement.scrollTop > 0);
+        }
+    });
+</script>
+<!-- Plugins and scripts required by this view-->
+<script th:src="@{vendors/jquery/js/jquery.min.js}"></script>
+<script th:src="@{vendors/datatables.net/js/dataTables.min.js}"></script>
+<script th:src="@{vendors/datatables.net-bs5/js/dataTables.bootstrap5.min.js}"></script>
+<script th:src="@{js/datatables.js}"></script>
+<script>
+</script>
+
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!doctype html>
+<html class="no-js" lang=""
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Book Library</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <th:block th:replace="layout_customer/head :: head"></th:block>
+    <style>
+        /* General Container Styling */
+        #cart_items .container, #do_action .container {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Table Styling */
+        .table {
+            border-collapse: separate;
+            width: 100%;
+            background-color: #ffffff;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .table th, .table td {
+            text-align: center;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f1f1f1;
+            color: #333;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* Highlight Rows */
+        .table tr:hover {
+            background-color: #f7f7f7;
+        }
+
+        /* Product Image Styling */
+        .cart_product img {
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        /* Buttons Styling */
+        .cart_quantity_button button {
+            background-color: #ffa500;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 0 2px;
+        }
+
+        .cart_quantity_button button:hover {
+            background-color: #e69500;
+        }
+
+        /* Input Styling */
+        /*.cart_quantity_input {*/
+        /*    text-align: center;*/
+        /*    border: 1px solid #ddd;*/
+        /*    border-radius: 5px;*/
+        /*    width: 40px;*/
+        /*    margin: 0 5px;*/
+        /*}*/
+
+        /* Price and Total Styling */
+        .price {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .cart_total p, .total_area span {
+            color: #27ae60;
+            font-size: 18px;
+        }
+
+        /* Action Buttons Styling */
+        .btn-default {
+            background-color: #3498db;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-default:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-warning {
+            background-color: #f39c12;
+            color: #fff;
+            border: none;
+        }
+
+        /* Coupon Form Styling */
+        .chose_area {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+        }
+
+        .chose_area input[type="text"] {
+            width: 80%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+
+        /* Alerts */
+        #alert {
+            font-weight: bold;
+        }
+
+        /* Empty Cart Message */
+        .empty-cart-message {
+            text-align: center;
+            font-size: 20px;
+            color: #e74c3c;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .cart_description h4, .cart_product, .price_td, .cart_total {
+                font-size: 14px;
+            }
+
+            /*.cart_quantity_button button, .cart_quantity_input {*/
+            /*    font-size: 12px;*/
+            /*}*/
+
+            .btn-default {
+                padding: 8px 15px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+    <!--************************************
+            Header Start
+    *************************************-->
+    <div th:include="layout_customer/navbar:: navbar"></div>
+    <!--************************************
+            Header End
+    *************************************-->
+    <!--************************************
+            Inner Banner Start
+    *************************************-->
+    <div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100" data-appear-top-offset="600" data-parallax="scroll" th:attr="data-image-src=@{/images/parallax/bgparallax-07.jpg}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="tg-innerbannercontent">
+                        <h1>Giỏ hàng</h1>
+                        <ol class="tg-breadcrumb">
+                            <li><a href="javascript:void(0);">Trang chủ</a></li>
+                            <li class="tg-active">Giỏ hàng</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--************************************
+            Inner Banner End
+    *************************************-->
+    <!--************************************
+            Main Start
+    *************************************-->
+    <main id="tg-main" class="tg-main tg-haslayout">
+        <!--************************************
+                News Grid Start
+        *************************************-->
+        <div class="tg-sectionspace tg-haslayout">
+            <div class="container">
+                <div class="row">
+                    <section id="cart_items">
+                        <div class="container">
+                            <span id="alert" style="color: red" th:text="${alert}"></span>
+                            <div class="table-responsive cart_info">
+                                <table class="table table-condensed">
+                                    <thead>
+                                    <tr class="cart_menu">
+                                        <td class="checkbox" style="display: revert;">Chọn</td>
+                                        <td class="image">Sản phẩm</td>
+                                        <td class="description">Tên sản phẩm</td>
+                                        <td class="pric">Giá</td>
+                                        <td class="quantity">Số lượng</td>
+                                        <td class="total">Tổng</td>
+                                        <td></td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <th:block th:if="${listCart.size()>0}">
+                                        <tr th:each="cart : ${listCarts}">
+                                            <td class="checkbox" style="display: revert;">
+                                                <input type="checkbox" th:checked="${cart.status == 1}" th:onclick="'ChooseProduct('+${cart.id}+','+this.checked+');'">
+                                            </td>
+                                            <td class="cart_product">
+                                                <a href=""><img style="width: 100px;" th:src="${cart.product.image}"></a>
+                                            </td>
+                                            <td class="cart_description" style="width: 30%; padding-right: 5px;">
+                                                <h4><a href="" th:text="${cart.product.name}"></a></h4>
+                                            </td>
+                                            <td class="price_td">
+                                                <p class="price" th:text="${cart.product.price}+' VND'" th:attr="data-price=${cart.product.price}"></p>
+                                            </td>
+                                            <td class="cart_quantity">
+                                                <div class="cart_quantity_button">
+                                                    <a>
+                                                        <button class="cart_quantity_down btn-warning" style="width: 25px;"
+                                                                th:onclick="'reduceAmount('+${cart.id}+','+${cart.product.price}+');'"> -
+                                                        </button>
+                                                    </a>
+                                                    <input class="cart_quantity_input" type="text"
+                                                           name="quantity" th:value="${cart.quantity}" autocomplete="off"
+                                                           th:id="${cart.id}" size="2" readonly>
+                                                    <a>
+                                                        <button class="cart_quantity_up btn-warning" style="width: 25px;"
+                                                                th:onclick="'increaseAmount('+${cart.id}+','+${cart.product.price}+');'"> +
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td class="cart_total">
+                                                <p class="price" th:id="'total'+${cart.id}"
+                                                   th:text="${cart.product.price * cart.quantity}+' VND'" th:attr="data-price=${cart.product.price * cart.quantity}"></p>
+                                            </td>
+                                            <td class="cart_delete">
+                                                <a class="cart_quantity_delete"
+                                                   style="margin-right: 5px;"
+                                                   onclick="return confirm('Are you sure?')"
+                                                   th:href="@{'/cart/deleteCart/'+${cart.id}}"><i
+                                                        class="fa fa-times"></i></a>
+                                            </td>
+                                            <input type="hidden" th:id="'maxQuantity'+${cart.id}" th:value="${cart.product.quantity}">
+                                        </tr>
+                                    </th:block>
+                                    </tbody>
+                                </table>
+                                <th:block th:if="${listCart.size()==0}">
+                                    <h4 style="text-align: center; color: red"> Giỏ hàng trống, <a th:href="@{/product/listproducts}">Mua sắm ngay!</a></h4>
+                                </th:block>
+                            </div>
+                        </div>
+                    </section> <!--/#cart_items-->
+
+                    <section id="do_action">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <form th:action="@{/cart/applycoupon}" th:object="${promotion}">
+                                        <div class="chose_area">
+                                            <ul class="user_info">
+                                                <label>Áp dụng mã giảm giá:</label>
+                                                <input type="text" th:field="*{code}" >
+                                            </ul>
+                                            <span th:text="${alert_promotion}" style="color:red; margin-left: 40px;display: block"></span>
+                                            <button style="box-shadow: 5px 3px 5px rgb(0 0 0 / 50%);" class="btn btn-default check_out" type="submit">Áp dụng</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-sm-6">
+                                    <form th:action="@{/cart/checkout}" >
+                                        <div>
+                                            <div class="total_area">
+                                                <ul>
+                                                    <li>Tổng phụ trong giỏ <span class="price" th:text="${subtotal}" th:attr="data-price=${subtotal}"></span></li>
+                                                    <li>Chi phí vận chuyển <span>Miễn phí</span></li>
+                                                    <li>Tổng cộng <span class="price" th:value="${total}" th:text="${total}" th:attr="data-price=${total}"></span></li>
+                                                </ul>
+                                                <a class="btn btn-default update" th:href="@{/cart/show}" style="box-shadow: 5px 3px 5px rgb(0 0 0 / 50%);" >Cập nhật</a>
+                                                <input type="text" name="totalprice" th:value="${total}" style="display: none">
+                                                <input type="text" name="subtotal" th:value="${subtotal}" style="display: none">
+                                                <input type="text" name="promotionCode" th:value="${promotion.code}" style="display: none">
+                                                <button th:if="${listCart.size()>0}" type="submit" class="btn btn-default check_out"
+                                                        style="box-shadow: 5px 3px 5px rgb(0 0 0 / 50%);
+                                                        margin-left: 10px;">Thanh toán</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </section><!--/#do_action-->
+                </div>
+            </div>
+        </div>
+        <!--************************************
+                News Grid End
+        *************************************-->
+    </main>
+    <!--************************************
+            Main End
+    *************************************-->
+    <!--************************************
+            Footer Start
+    *************************************-->
+    <th:block th:replace="layout_customer/footer :: footer_customer"></th:block>
+    <!--************************************
+            Footer End
+    *************************************-->
+</div>
+<!--************************************
+        Wrapper End
+*************************************-->
+<th:block th:replace="layout_customer/js :: js"></th:block>
+<script th:src="@{/js/js_cart.js}"></script>
+</body>
+
+</html>

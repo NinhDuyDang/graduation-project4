@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Admin - Add Product</title>
+    <th:block th:replace="layout_admin/head_admin :: head_admin"></th:block>
+</head><!--/head-->
+<body>
+<div class="wrapper row-offcanvas row-offcanvas-left">
+    <th:block th:replace="layout_admin/navbar_admin :: navbar_admin"></th:block>
+    <div style="display: flex">
+        <th:block th:replace="layout_admin/sidebar_admin :: sidebar_admin"></th:block>
+        <div class="container">
+            <div class="row"
+                 style="border: 1px darkgrey solid; border-radius: 10px; width: 50%; margin: 0 auto; padding: 20px;">
+                <div class="col-sm-12">
+                    <h2 class="myclass">Thêm khách hàng</h2>
+                    <form th:action="@{/admin/customer/save}" th:object="${user}" method="post"
+                          enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label style="font-weight: bold">Tên khách hàng</label>
+                            <input th:field="*{customer.name}" type="text" class="form-control"
+                                   name="name" placeholder="Nhập tên khách hàng..." id="customerName" required/>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-weight: bold">Tên đăng nhập</label>
+                            <input th:field="*{username}" type="text" class="form-control"
+                                   name="username" placeholder="Nhập tên đăng nhập..." id="username"
+                                   pattern=".{6,}" title="Six or more characters" required/>
+                            <span style="color: red" th:text="${alert_Username}"></span>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-weight: bold">Mật khẩu</label>
+                            <input th:field="*{password}" type="password" class="form-control"
+                                   name="password" placeholder="Nhâp mật khẩu..." id="password"
+                                   pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+                                   title="Minimum eight characters, at least one letter, one number and one special character"
+                                   required/>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-weight: bold">Email</label>
+                            <input th:field="*{customer.email}" type="email" class="form-control"
+                                   name="email" placeholder="Nhập email..." id="email"
+                                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                   title="(characters followed: character@characters.domain " required/>
+                            <span style="color: red" th:text="${alert_Email}"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="font-weight: bold">Phone</label>
+                            <input th:field="*{customer.phone}" type="text" class="form-control"
+                                   name="email" id="phone" placeholder="Enter phone" pattern="^[0-9]{10,11}$"
+                                   title="Input [10-11] Number "/>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-weight: bold">Ảnh đại diện</label>
+                            <input type="file" name="image" id="image" max-file-size="5.120"
+                                   accept="image/png, image/jpeg" class="file-input">
+                        </div>
+                        <div class="form-group">
+                            <label style="font-weight: bold">Address</label>
+                            <input th:field="*{customer.address}" type="text" class="form-control"
+                                   name="name" placeholder="Enter Adrdress" id="address">
+                        </div>
+                        <div class="form-group">
+                            <label style="font-weight: bold">birthday</label>
+                            <input th:field="*{customer.birthday}" type="date" class="form-control"
+                                   name="name" id="birthday" placeholder="Enter birthday " required/>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary">Tạo</button>
+                        <a class="btn btn-primary" href="/admin/customer">Quay lại màn khách hàng</a>
+                    </form>
+                </div>
+            </div>
+            <th:block th:replace="layout_admin/footer :: footer"></th:block>
+        </div>
+    </div>
+</div>
+<th:block th:replace="layout_admin/js_admin :: js_admin"></th:block>
+</body>
+</html>

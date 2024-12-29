@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:fragment="sidebar_admin">
+    <div class="sidebar sidebar-fixed sidebar-dark bg-dark-gradient border-end" id="sidebar">
+        <div class="sidebar-header border-bottom">
+            <h4 sec:authorize="hasRole('ADMIN')">Trang quản trị</h4>
+            <h4 sec:authorize="hasRole('STAFF')">Trang nhân viên</h4>
+        </div>
+        <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="">
+            <li sec:authorize="hasRole('ADMIN')" class="nav-item"><a class="nav-link" th:href="@{/admin/home}">
+                <svg class="nav-icon">
+                    <use th:xlink:href="@{/vendors/@coreui/icons/svg/free.svg} + '#cil-speedometer'"></use>
+                </svg><span data-coreui-i18n="dashboard">Doanh thu</span></a></li>
+            <li sec:authorize="hasRole('ADMIN')" class="nav-item"><a class="nav-link" th:href="@{/admin/revenue}">
+                <svg class="nav-icon">
+                    <use th:xlink:href="@{/vendors/@coreui/icons/svg/free.svg} + '#cil-drop'"></use>
+                </svg><span data-coreui-i18n="colors">Biểu đồ</span></a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/admin/product}">
+                <svg class="nav-icon">
+                    <use th:xlink:href="@{/vendors/@coreui/icons/svg/free.svg} + '#cil-drop'"></use>
+                </svg><span data-coreui-i18n="colors">Sản phẩm</span></a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/admin/listPromotions}">
+                <svg class="nav-icon">
+                    <use th:xlink:href="@{/vendors/@coreui/icons/svg/free.svg} + '#cil-drop'"></use>
+                </svg><span data-coreui-i18n="colors">Mã giảm giá</span></a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/admin/order}">
+                <svg class="nav-icon">
+                    <use th:xlink:href="@{/vendors/@coreui/icons/svg/free.svg} + '#cil-drop'"></use>
+                </svg><span data-coreui-i18n="colors">Đơn hàng</span></a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/admin/category/listCategory}">
+                <svg class="nav-icon">
+                    <use th:xlink:href="@{/vendors/@coreui/icons/svg/free.svg} + '#cil-drop'"></use>
+                </svg><span data-coreui-i18n="colors">Danh mục</span></a></li>
+            <li sec:authorize="hasRole('ADMIN')" class="nav-item"><a class="nav-link" th:href="@{/admin/customer}">
+                <svg class="nav-icon">
+                    <use th:xlink:href="@{/vendors/@coreui/icons/svg/free.svg} + '#cil-drop'"></use>
+                </svg><span data-coreui-i18n="colors">Khách hàng</span></a></li>
+            <li sec:authorize="hasRole('ADMIN')" class="nav-item"><a class="nav-link" th:href="@{/admin/staff}">
+                <svg class="nav-icon">
+                    <use th:xlink:href="@{/vendors/@coreui/icons/svg/free.svg} + '#cil-drop'"></use>
+                </svg><span data-coreui-i18n="colors">Nhân viên</span></a></li>
+        </ul>
+    </div>
+</th:block>
+</body>
+</html>

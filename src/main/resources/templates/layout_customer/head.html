@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">>
+<head>
+    <meta charset="UTF-8">
+    <th:block th:fragment="head">
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+        <link rel="stylesheet" th:href="@{/css/normalize.css}">
+        <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+        <link rel="stylesheet" th:href="@{/css/icomoon.css}">
+        <link rel="stylesheet" th:href="@{/css/jquery-ui.css}">
+        <link rel="stylesheet" th:href="@{/css/owl.carousel.css}">
+        <link rel="stylesheet" th:href="@{/css/transitions.css}">
+        <link rel="stylesheet" th:href="@{/css/main.css}">
+        <link rel="stylesheet" th:href="@{/css/color.css}">
+        <link rel="stylesheet" th:href="@{/css/responsive.css}">
+        <link rel="stylesheet" th:href="@{/css/styles.css}">
+        <script th:src="@{/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js}"></script>
+        <style>
+            /* Thiết lập cơ bản cho container */
+            .tg-userlogin {
+                position: relative;
+                display: inline-block;
+                cursor: pointer;
+            }
+
+            /* Tạo style cho dropdown và ẩn mặc định */
+            .dropdown-menu {
+                display: none;
+                position: absolute;
+                top: 90%;
+                /* Vị trí dưới thẻ tg-userlogin */
+                left: 0;
+                background-color: #fff;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                border-radius: 4px;
+                min-width: 150px;
+                padding: 10px 0;
+                z-index: 1000;
+            }
+
+            /* Style cho các tùy chọn bên trong dropdown */
+            .dropdown-menu a {
+                display: block;
+                padding: 8px 16px;
+                color: #333;
+                text-decoration: none;
+            }
+
+            .dropdown-menu a:hover {
+                background-color: #f0f0f0;
+            }
+
+            /* Hiện dropdown khi hover hoặc click vào tg-userlogin */
+            .tg-userlogin:hover .dropdown-menu {
+                display: block;
+            }
+        </style>
+    </th:block>
+</head>
+<body>
+
+</body>
+</html>

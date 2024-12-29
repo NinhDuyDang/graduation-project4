@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Admin - Thêm sản phẩm</title>
+    <th:block th:replace="layout_admin/head_admin :: head_admin"></th:block>
+</head><!--/head-->
+<body>
+<div class="wrapper row-offcanvas row-offcanvas-left">
+    <th:block th:replace="layout_admin/navbar_admin :: navbar_admin"></th:block>
+    <div style="display: flex">
+        <th:block th:replace="layout_admin/sidebar_admin :: sidebar_admin"></th:block>
+        <div class="container" style="padding: 0; position: relative">
+            <div class="container">
+                <div class="row"
+                     style="border: 1px darkgrey solid; border-radius: 10px; width: 50%; margin: 0 auto; padding: 20px;">
+                    <div class="col-sm-12">
+                        <h2 class="myclass">Thêm sản phẩm</h2>
+                        <form th:action="@{/admin/product/save}" th:object="${product}" method="post"
+                              enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label>Tên sản phẩm</label>
+                                <input th:field="*{name}" type="text" class="form-control"
+                                       name="name" placeholder="Nhập tên sản phẩm..." id="name" value="" required>
+                                <input type="hidden" th:field="*{status}" value="1">
+                            </div>
+                            <div class="form-group">
+                                <label>Tên tác giả</label>
+                                <input th:field="*{author}" type="text" class="form-control"
+                                       name="name" placeholder="Nhập tên tác giả..." id="author" value="" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Mô tả</label>
+                                <input th:field="*{description}" type="text" class="form-control"
+                                       name="name" placeholder="Nhập mô tả..." id="description" value="" required>
+                            </div>
+                            <tr>
+                                <td>Danh mục</td>
+                                <td><select th:field="*{category}" class="form-select"
+                                            aria-label="Default select example">
+                                    <option th:each="cate :${listCategory}" th:value="${cate.id}"
+                                            th:text="${cate.name}"></option>
+                                </select></td>
+                            </tr>
+                            <div class="form-group">
+                                <label>Ảnh</label>
+                                <input th:field="*{image}" type="text" class="form-control"
+                                       name="name" placeholder="Nhập đường link ảnh..." id="image" value="" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Giá</label>
+                                <input th:field="*{price}" type="text" class="form-control"
+                                       name="name" placeholder="Nhập giá..." id="price" value="" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Số lượng</label>
+                                <input th:field="*{quantity}" type="text" class="form-control"
+                                       name="name" placeholder="Nhập số lượng..." id="quantity" value="" required>
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-primary">Lưu</button>
+                            <a class="btn btn-primary" href="/admin/product">Quay lại màn hình sản phẩm</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="layout_admin/js_admin :: js_admin"></th:block>
+</body>
+</html>

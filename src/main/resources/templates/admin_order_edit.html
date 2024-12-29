@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+  <meta charset="utf-8">
+  <title>Admin - Edit Category</title>
+  <th:block th:replace="layout_admin/head_admin :: head_admin"></th:block>
+</head><!--/head-->
+<body>
+<div class="wrapper row-offcanvas row-offcanvas-left">
+  <div th:include="layout_admin/navbar_admin :: navbar_admin"></div>
+  <div style="display: flex">
+    <div th:include="layout_admin/sidebar_admin :: sidebar_admin"></div>
+    <div class="container" style="padding: 0; position: relative">
+      <div class="container" style="padding: 0">
+        <div class="container" style="padding: 0">
+          <div class="container">
+            <h2>Chi tiết đơn hàng</h2>
+            <div class="row">
+              <div class="col-md-4">
+                <label th:text="'Id đơn hàng: '+${order.id}"></label><br>
+                <label th:text="'Ngày tạo: '+${order.createdAt}"></label><br>
+                <label th:text="'Tên khách hàng: '+${order.customer.name}"></label><br>
+                <!--0:ship cod, 1:banking-->
+                <label class="col-6"
+                       th:text="'Phương thức thanh toán: '+${order.paymentMethod==1?'Banking':'Ship cod'}"></label><br>
+                <a th:href="@{'/order/' + ${order.id} + '/export-pdf'}" class="btn btn-primary">
+                  Xuất PDF
+                </a>
+              </div>
+              <div class="col-md-4">
+                <label th:text="'Tên người nhận: '+${order.receiverName}"></label><br>
+                <label th:text="'Số điện thoại: '+${order.receiverPhone}"></label><br>
+                <label th:text="'Địa chỉ: '+${order.receiverAddress}"></label><br>
+                <label th:text="'Giá: '+${order.formattedPrice}"></label><br>
+              </div>
+              <div class="col-md-4">
+                <label th:text="'Mã giảm giá: '+${order.promotion==null? 'None' : order.promotion.name}+'-'+${order.promotion==null? '0' : order.promotion.discount}+'%'"></label><br>
+                <label th:text="'Đơn vị vận chuyển: '+${order.shippingUnit.name}"></label><br>
+                <form th:action="@{/admin/saveOrderEdit}" th:object="${order}" method="post"
+                      enctype="multipart/form-data">
+                  <label class="col-md-6" style="padding: 0px">Trạng thái thanh toán: </label>
+                  <select class="col-md-6" th:field="*{paymentStatus}">
+                    <option th:value='0' th:text="'Chưa thanh toán'"></option>
+                    <option th:value='1' th:text="'Đã thanh toán'"></option>
+                  </select>
+                  <label class="col-md-6" style="padding: 0px">Trạng thái: </label>
+                  <select class="col-md-6" th:field="*{status}">
+                    <option th:value='0' th:text="'Đang xử lý'"></option>
+                    <option th:value='1' th:text="'Đang vận chuyển'"></option>
+                    <option th:value='2' th:text="'Đã hoàn thành'"></option>
+                    <option th:value='3' th:text="'Đã hủy'"></option>
+                  </select>
+                  <input type="hidden" th:field="*{id}">
+                  <div style="margin: 10px 0px;" sec:authorize="hasAnyRole('ADMIN','STAFF')">
+                    <span style="color:red" th:text="${alert_status}" ></span>
+                    <input style="display: block" type="submit" value="OK" class="btn btn-success col-2"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <table class="table table-bordered">
+              <thead>
+              <tr style="text-align: center; background-color: orange; color: #fff">
+                <th>Tên sản phẩm</th>
+                <th>Ảnh</th>
+                <th>Số lượng</th>
+                <th>Giá</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="orderDetail : ${orderDetailList}">
+                <td th:text="${orderDetail.product.name}"></td>
+                <td><img th:src="@{${orderDetail.product.image}}" style="width: 50px"></td>
+                <td th:text="${orderDetail.quantity}"></td>
+                <td th:text="${orderDetail.formattedPrice}"></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<th:block th:replace="layout_admin/js_admin :: js_admin"></th:block>
+</body>
+</html>

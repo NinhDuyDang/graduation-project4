@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+  <meta charset="utf-8">
+  <title>Admin - Edit Category</title>
+  <th:block th:replace="layout_admin/head_admin :: head_admin"></th:block>
+</head><!--/head-->
+<body>
+<div class="wrapper row-offcanvas row-offcanvas-left">
+  <div th:include="layout_admin/navbar_admin :: navbar_admin"></div>
+  <div style="display: flex">
+    <div th:include="layout_admin/sidebar_admin :: sidebar_admin"></div>
+    <div class="container">
+      <div class="row"
+           style="border: 1px darkgrey solid; border-radius: 10px; width: 50%; margin: 0 auto; padding: 20px;">
+        <div class="col-sm-12">
+          <form th:action="@{/admin/customer/saveEdit}" th:object="${user}" method="post"
+                enctype="multipart/form-data">
+            <div style="display: flex ; justify-content: space-between">
+              <h2 class="myclass">Chỉnh sửa thông tin khách hàng</h2>
+              <div>
+<!--                <img style="width: 100px" th:src="*{customer.avatar} ">-->
+                <img class="img-rounded" style="width: 100px;" th:src="@{${user.customer.getImage()}}" alt="image">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>ID khách hàng</label>
+              <input th:field="*{customer.id}" type="text" class="form-control"
+                     name="name" placeholder="Id" value="" readonly/>
+              <input type="hidden" th:field="*{id}"/>
+              <input type="hidden" th:field="*{staff.id}"/>
+            </div>
+            <div class="form-group">
+              <label>Customer Name</label>
+              <input th:field="*{customer.name}" type="text" class="form-control"
+                     name="name" placeholder="Enter name" id="staffName">
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input th:field="*{customer.email}" type="email" class="form-control"
+                     name="email" placeholder="Enter email" id="email"
+                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                     title="(characters followed: character@characters.domain " readonly/>
+            </div>
+            <div class="form-group">
+              <label>Phone</label>
+              <input th:field="*{customer.phone}" type="text" class="form-control"
+                     name="phone" id="phone"
+                     pattern="^[0-9]{10,11}$"
+                     title="Input Number "/>
+            </div>
+            <div class="form-group">
+              <label style="font-weight: bold">Ảnh đại diện</label>
+              <input type="file" name="image" id="image" max-file-size="5.120"
+                     accept="image/png, image/jpeg" class="file-input">
+            </div>
+            <div class="form-group">
+              <label>Username</label>
+              <input th:field="*{username}" type="text" class="form-control"
+                     name="username" placeholder="Enter username" id="username"
+                     pattern=".{6,}"
+                     title="Six or more characters" readonly/>
+            </div>
+            <div class="form-group">
+              <label>Address</label>
+              <input th:field="*{customer.address}" type="text" class="form-control"
+                     name="address" placeholder="Enter Adrdress" id="address">
+            </div>
+            <div class="form-group">
+              <label>birthday</label>
+              <input th:field="*{customer.birthday}" type="date" class="form-control"
+                     name="birthday" id="birthday">
+            </div>
+            <div class="form-group">
+              <label>Status</label>
+              <select th:field="*{customer.status}" class="form-select">
+                <option th:value='0' th:text="Disable"></option>
+                <option th:value='1' th:text="Enable"></option>
+              </select>
+            </div>
+            <br>
+            <button sec:authorize="hasAnyRole('ADMIN','STAFF')"
+                    type="submit" class="btn btn-primary">Lưu Thay đổi</button>
+            <a class="btn btn-primary" href="/admin/customer">Màn hình khách hàng</a>
+          </form>
+        </div>
+      </div>
+      <th:block th:replace="layout_admin/footer :: footer"></th:block>
+    </div>
+  </div>
+</div>
+<th:block th:replace="layout_admin/js_admin :: js_admin"></th:block>
+</body>
+</html>

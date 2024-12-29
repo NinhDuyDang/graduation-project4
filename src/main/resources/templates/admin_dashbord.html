@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <th:block th:replace="layout_admin/head_admin :: head_admin"></th:block>
+</head>
+<body>
+<div class="wrapper row-offcanvas row-offcanvas-left">
+  <th:block th:replace="layout_admin/navbar_admin :: navbar_admin"></th:block>
+  <div style="display: flex">
+    <th:block th:replace="layout_admin/sidebar_admin :: sidebar_admin"></th:block>
+    <div class="container" style="padding: 0; position: relative" >
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-4 col-md-12">
+            <div class="white-box analytics-info">
+              <h3 class="box-title" style="font-family: cursive; color: orange;text-align: center">Tổng sản phẩm bán ra</h3>
+              <h4 style="text-align: center" th:text="${sales}"></h4>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-12">
+            <div class="white-box analytics-info">
+              <h3 class="box-title" style="font-family: cursive; color: orange;text-align: center">Tổng doanh thu</h3>
+              <h4 class="price" style="text-align: center" th:text="${income}+' VND'" th:attr="data-price=${income}"></h4>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-12">
+            <div class="white-box analytics-info">
+              <h3 class="box-title" style="font-family: cursive; color: orange;text-align: center">Tổng khách hàng</h3>
+              <h4 style="text-align: center" th:text="${numberofcustomers}"></h4>
+            </div>
+          </div>
+        </div>                <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12">
+          <div class="white-box">
+            <div class="d-md-flex mb-3">
+              <h3 class="box-title mb-0">Doanh số gần đây</h3>
+
+            </div>
+            <div class="table-responsive">
+              <table class="table no-wrap">
+                <thead>
+                <tr>
+                  <th class="border-top-0">Tên khách hàng</th>
+                  <th class="border-top-0">Trạng thái</th>
+                  <th class="border-top-0">Ngày</th>
+                  <th class="border-top-0">Tổng</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="order : ${listorder}">
+                  <td class="txt-oflo" th:text="${order.customer.name}">Elite admin</td>
+                  <td>Đã hoàn thành</td>
+                  <td class="txt-oflo" th:text="${#calendars.format(order.createdAt, 'dd/MM/yyyy')}"></td>
+                  <td><span class="price" th:text="${order.price}+' VND'" th:attr="data-price=${order.price}"></span></td>
+                </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<th:block th:replace="layout_admin/js_admin :: js_admin"></th:block>
+<script th:src="@{/js/number.js}"></script>
+</body>
+</html>

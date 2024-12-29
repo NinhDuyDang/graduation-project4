@@ -1,0 +1,190 @@
+<!doctype html>
+<html class="no-js" lang=""
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Book Library</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <th:block th:replace="layout_customer/head :: head"></th:block>
+  <style>
+    /* Đưa form vào giữa màn hình */
+    #form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f2f2f2; /* Màu nền nhẹ nhàng */
+    }
+
+    .login-form {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .login-form h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .login-form label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .login-form input[type="text"],
+    .login-form input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 0px 0 15px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+
+    .login-form h2{
+      text-align: center;
+    }
+
+    .login-form .thm_btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #5cb85c;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .login-form .thm_btn:hover {
+      background-color: #4cae4c;
+    }
+
+    .login-form .action ul_li {
+      margin-top: 20px;
+    }
+
+    .login-form a {
+      color: #5cb85c;
+      text-decoration: none;
+    }
+
+    .login-form a:hover {
+      text-decoration: underline;
+    }
+
+    /* Style liên kết "Forgot password" và phần cảnh báo */
+    .login-form .left,
+    .login-form .right {
+      display: block;
+      margin-top: 10px;
+    }
+
+    .login-form .right p {
+      font-size: 14px;
+      color: red;
+    }
+
+  </style>
+</head>
+<body>
+
+<div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+  <!--************************************
+          Header Start
+  *************************************-->
+  <div th:include="layout_customer/navbar:: navbar"></div>
+  <!--************************************
+          Header End
+  *************************************-->
+
+  <main id="tg-main" class="tg-main tg-haslayout">
+    <!--************************************
+            News Grid Start
+    *************************************-->
+    <div class="tg-sectionspace tg-haslayout">
+      <div class="container">
+        <div class="row">
+          <section id="form"><!--form-->
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-2 col-sm-offset-1"></div>
+                <div class="col-sm-4 col-sm-offset-1">
+                  <div class="login-form"><!--login form-->
+                    <h2>Đăng nhập vào tài khoản của bạn</h2>
+                    <form action="#" th:action="@{/doLogin}" method="post">
+                      <label>Tên đăng nhập</label>
+                      <input type="text" placeholder="Tên đăng nhập của bạn" name="username">
+                      <label>Mật khẩu</label>
+<!--                      <input type="password" placeholder="Mật khẩu" name="password">-->
+                      <div style="position: relative;">
+                        <input type="password" placeholder="Mật khẩu" id="password" name="password">
+                        <input type="checkbox" id="togglePassword" style="position: absolute; right: 10px; top: 10px;">
+                        <label for="togglePassword" style="cursor: pointer;">Hiển thị mật khẩu</label>
+                      </div>
+                      <span class="left">
+                            <a th:href="@{/forgot_password}">Lấy lại mật khẩu?</a>
+                        </span>
+                      <span class="right">
+                            <p style="color: red" th:text="${alert}"></p>
+                        </span>
+                      <button class="thm_btn" type="submit">Đăng nhập ngay</button>
+                      <div class="action ul_li">
+                        <span>Không có tài khoản? <a th:href="@{/process_register}">Đăng ký</a></span>
+                      </div>
+                    </form>
+                  </div><!--/login form-->
+
+                </div>
+              </div>
+            </div>
+          </section><!--/form-->
+        </div>
+      </div>
+    </div>
+    <!--************************************
+            News Grid End
+    *************************************-->
+  </main>
+
+  <th:block th:replace="layout_customer/footer :: footer_customer"></th:block>
+  <!--************************************
+          Footer End
+  *************************************-->
+</div>
+<!--************************************
+        Wrapper End
+*************************************-->
+<th:block th:replace="layout_customer/js :: js"></th:block>
+<script>
+  document.getElementById('togglePassword').addEventListener('change', function (e) {
+    const passwordInput = document.getElementById('password');
+    if (e.target.checked) {
+      passwordInput.type = 'text';
+    } else {
+      passwordInput.type = 'password';
+    }
+  });
+</script>
+<script th:inline="javascript">
+  window.onload = function() {
+    var alertMessage = /*[[${alert}]]*/ null;
+    if (alertMessage !== null) {
+      alert(alertMessage);
+    }
+  };
+</script>
+</body>
+
+</html>
