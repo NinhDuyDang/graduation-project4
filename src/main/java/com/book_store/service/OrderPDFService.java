@@ -36,7 +36,6 @@ public class OrderPDFService {
 
             // Áp dụng font vào document
             document.setFont(font);
-
             // Thêm tiêu đề
             document.add(new Paragraph("Hóa đơn ")
                     .setBold()
@@ -84,6 +83,17 @@ public class OrderPDFService {
 
             // Thêm bảng vào document
             document.add(table);
+            // Thêm chữ ký vào chân trang
+            document.add(new Paragraph("\n\n\n")
+                    .setTextAlignment(TextAlignment.RIGHT)); // Khoảng trắng trước chữ ký
+            document.add(new Paragraph("Người lập hóa đơn")
+                    .setBold()
+                    .setTextAlignment(TextAlignment.RIGHT));
+            document.add(new Paragraph("(Ký, ghi rõ họ tên)")
+                    .setItalic()
+                    .setTextAlignment(TextAlignment.RIGHT)
+                    .setMarginTop(10));
+
 
             // Đóng document
             document.close();

@@ -36,7 +36,11 @@
                         <ul th:each="noti : ${notify}">
                             <li th:class="${noti.status == 0} ? 'dimmed' : ''">
                                 <a th:href="@{'/admin/orderDetail/' + ${noti.order.id} + '?source=notification'}">
-                                    <p th:text="${noti.order.receiverName + ' đã đặt đơn hàng trị giá ' + noti.order.formattedPrice + ' VND'}"></p>
+                                    <p>
+                                        <span th:text="${noti.order.receiverName + ' đã đặt đơn hàng trị giá ' + noti.order.formattedPrice + ' VND'}"></span><br>
+                                        <span>Thời gian: </span><span th:text="${#dates.format(noti.createdAt, 'dd/MM/yyyy HH:mm:ss')}"></span>
+                                    </p>
+
                                 </a>
                             </li>
                         </ul>
